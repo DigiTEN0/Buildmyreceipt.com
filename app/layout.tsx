@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Instrument_Sans, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { SITE, NAV, STATS } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const display = Plus_Jakarta_Sans({
+const body = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb", display: "swap" });
 
@@ -277,7 +281,7 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${display.variable} ${mono.variable}`}>
+    <html lang="en" className={`${body.variable} ${display.variable} ${mono.variable}`}>
       <body
         style={
           {

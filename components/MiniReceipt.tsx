@@ -1,6 +1,7 @@
 import { fromTemplate, computeTotals, barcodeBars } from "@/lib/receipt";
 import { money } from "@/lib/currency";
 import type { TemplateDef } from "@/lib/types";
+import BrandMark from "./BrandMark";
 
 /**
  * Compact, static receipt card for the marquee and template grids. Deliberately
@@ -25,8 +26,9 @@ export default function MiniReceipt({
       style={{ fontFamily: "var(--font-receipt)", fontSize: 8.5, lineHeight: 1.5 }}
       aria-hidden="true"
     >
-      <div className="text-center">
-        <div style={{ fontWeight: 700, fontSize: 10, letterSpacing: "0.04em" }}>
+      <div className="flex flex-col items-center text-center">
+        <BrandMark category={template.category} seed={template.slug} size={26} />
+        <div className="mt-1.5" style={{ fontWeight: 700, fontSize: 10, letterSpacing: "0.04em" }}>
           {data.business.name.toUpperCase()}
         </div>
         {data.business.cityLine && (
@@ -64,10 +66,6 @@ export default function MiniReceipt({
           />
         ))}
       </div>
-
-      <figcaption className="mt-2 text-center font-sans text-[8px] font-semibold uppercase tracking-[0.14em] text-accent-600">
-        {template.name}
-      </figcaption>
     </figure>
   );
 }

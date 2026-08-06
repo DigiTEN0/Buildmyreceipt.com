@@ -4,6 +4,7 @@ import { TEMPLATES } from "@/lib/templates";
 import { SITE, STATS } from "@/lib/site";
 import HeroInteractive from "@/components/HeroInteractive";
 import TemplateMarquee from "@/components/TemplateMarquee";
+import MiniReceipt from "@/components/MiniReceipt";
 
 export const metadata: Metadata = {
   title: "Free Receipt Maker — Create Realistic Receipts Online in Seconds",
@@ -215,9 +216,9 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-balance font-display text-[clamp(2.5rem,6vw,4.2rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-ink-50">
-              Free Receipt Maker,{" "}
-              <span className="gradient-text">Start in Seconds</span>
+            <h1 className="text-balance font-display text-[clamp(2.6rem,6vw,4.3rem)] font-extrabold leading-[0.96] tracking-[-0.035em] text-ink-50">
+              Free receipt maker,{" "}
+              <span className="text-[var(--accent-600)]">start in seconds</span>
             </h1>
 
             <p className="mt-6 max-w-[52ch] text-[17px] leading-relaxed text-ink-300 text-pretty">
@@ -376,7 +377,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════ featured templates ══════════════════ */}
+      {/* ══════════════════ featured templates — receipt previews ══════════════════ */}
       <section className="container-x pb-20">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
@@ -384,31 +385,46 @@ export default function Home() {
               <Icon path={ICONS.receipt} className="h-3.5 w-3.5" /> Templates
             </p>
             <h2 className="font-display text-[clamp(1.8rem,3.6vw,2.4rem)] font-bold leading-[1.1] tracking-[-0.03em] text-ink-50">
-              Start from the format you actually need
+              See the actual receipt before you start
             </h2>
+            <p className="mt-3 max-w-[54ch] text-[15px] leading-relaxed text-ink-400">
+              Every template is a real, branded receipt — logo, itemised lines, tax and totals
+              already laid out. Tap one to open it in the editor.
+            </p>
           </div>
           <Link href="/templates" className="btn btn-ghost">
-            All templates →
+            All {TEMPLATES.length} templates →
           </Link>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
           {featured.map((t) => (
             <Link
               key={t.slug}
               href={`/templates/${t.slug}`}
-              className="panel card-hover group flex flex-col p-5"
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-2)] px-4 pb-5 pt-8 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--line-2)] hover:shadow-[var(--shadow-2)]"
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-600)]">
-                {t.category}
-              </p>
-              <h3 className="mt-2.5 font-display text-[15.5px] font-bold tracking-[-0.01em] text-ink-50 transition-colors group-hover:text-[var(--accent-600)]">
-                {t.name}
-              </h3>
-              <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-ink-400">{t.blurb}</p>
-              <span className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.13em] text-ink-500 transition-colors group-hover:text-ink-300">
-                Open template →
-              </span>
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-24 opacity-70"
+                style={{
+                  background:
+                    "radial-gradient(60% 100% at 50% 0%, rgba(246,81,29,.1), transparent 70%)",
+                }}
+                aria-hidden="true"
+              />
+              <div className="relative flex flex-1 justify-center">
+                <div className="transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:rotate-[-1deg]">
+                  <MiniReceipt template={t} />
+                </div>
+              </div>
+              <div className="relative mt-6 text-center">
+                <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-[var(--accent-600)]">
+                  {t.category}
+                </p>
+                <h3 className="mt-1 font-display text-[15px] font-bold tracking-[-0.01em] text-ink-50 transition-colors group-hover:text-[var(--accent-600)]">
+                  {t.name}
+                </h3>
+              </div>
             </Link>
           ))}
         </div>

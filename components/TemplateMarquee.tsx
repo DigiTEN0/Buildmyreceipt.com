@@ -23,11 +23,14 @@ function Row({
           <Link
             key={`${t.slug}-${i}`}
             href={`/templates/${t.slug}`}
-            className="transition-transform duration-200 hover:-translate-y-1.5"
+            className="group block transition-transform duration-200 hover:-translate-y-1.5"
             tabIndex={-1}
             aria-hidden="true"
           >
             <MiniReceipt template={t} />
+            <p className="mt-2.5 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-ink-500 transition-colors group-hover:text-[var(--accent-600)]">
+              {t.name}
+            </p>
           </Link>
         ))}
       </div>

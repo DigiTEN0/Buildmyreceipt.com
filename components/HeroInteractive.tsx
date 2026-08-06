@@ -28,6 +28,7 @@ export default function HeroInteractive() {
   const totals = data ? computeTotals(data) : null;
   const total = data && totals ? money(totals.total, data.currency) : "";
   const fileName = `${active.replace(/-receipt$/, "")}-receipt.pdf`;
+  const activeTpl = getTemplate(active);
 
   return (
     <div className="relative mx-auto w-full max-w-[440px] lg:mr-0">
@@ -95,7 +96,12 @@ export default function HeroInteractive() {
                 className="animate-slide-up origin-top"
                 style={{ transform: "scale(.72) rotate(-1.4deg)" }}
               >
-                <Receipt data={data} />
+                <Receipt
+                  data={data}
+                  brand={
+                    activeTpl ? { category: activeTpl.category, seed: activeTpl.slug } : undefined
+                  }
+                />
               </div>
             ) : (
               <div

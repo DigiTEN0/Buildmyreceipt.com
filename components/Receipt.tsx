@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import type { ReceiptData } from "@/lib/types";
 import { computeTotals, formatDate, PAPER_WIDTH, barcodeBars } from "@/lib/receipt";
 import { plain, CURRENCIES } from "@/lib/currency";
+import BrandMark from "./BrandMark";
 
 const DENSITY = {
   condensed: { fs: 10.5, lh: 1.42, pad: 14 },
@@ -66,10 +67,12 @@ interface Props {
   data: ReceiptData;
   /** Watermark shown on the free preview. */
   watermark?: boolean;
+  /** When set (and no uploaded logo), render a generated brand emblem in the header. */
+  brand?: { category: string; seed: string };
 }
 
 const Receipt = forwardRef<HTMLDivElement, Props>(function Receipt(
-  { data, watermark = false },
+  { data, watermark = false, brand },
   ref
 ) {
   const t = computeTotals(data);
@@ -104,7 +107,7 @@ const Receipt = forwardRef<HTMLDivElement, Props>(function Receipt(
       <div style={{ padding: `${isDoc ? 34 : d.pad}px ${isDoc ? 40 : d.pad}px` }}>
         {/* ── header ── */}
         <div className="text-center">
-          {data.business.logo && (
+          {data.business.logo ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={data.business.logo}
@@ -112,7 +115,11 @@ const Receipt = forwardRef<HTMLDivElement, Props>(function Receipt(
               className="mx-auto mb-2 object-contain"
               style={{ maxHeight: isDoc ? 64 : 44, maxWidth: "70%" }}
             />
-          )}
+          ) : brand ? (
+            <div className="mb-2 flex justify-center">
+              <BrandMark category={brand.category} seed={brand.seed} size={isDoc ? 46 : 38} />
+            </div>
+          ) : null}
           <div
             style={{
               fontWeight: 700,
