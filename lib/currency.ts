@@ -15,16 +15,29 @@ export const CURRENCIES: Record<string, { symbol: string; code: string; label: s
   SGD: { symbol: "$", code: "SGD", label: "Singapore Dollar" },
 };
 
-export function money(value: number, currency: string): string {
-  const c = CURRENCIES[currency] ?? CURRENCIES.USD;
-  const zeroDecimal = currency === "JPY";
-  const n = zeroDecimal
-    ? Math.round(value).toLocaleString("en-US")
-    : value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  return `${c.symbol}${n}`;
+/**
+ * Digit grouping differs by currency, not just the symbol. India groups in
+ * lakh/crore (1,00,000) rather than thousands (100,000) — getting this wrong is
+ * immediately visible to an Indian reader.
+ */
+const GROUPING: Record<string, string> = {
+  INR: "en-IN",
+};
+
+const ZERO_DECIMAL = new Set(["JPY"]);
+
+/** Amount with digit grouping, no symbol. */
+export function plain(value: number, currency: string): string {
+  const loc = GROUPING[currency] ?? "en-US";
+  const digits = ZERO_DECIMAL.has(currency) ? 0 : 2;
+  return value.toLocaleString(loc, {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
 }
 
-export function plain(value: number, currency: string): string {
-  const zeroDecimal = currency === "JPY";
-  return zeroDecimal ? String(Math.round(value)) : value.toFixed(2);
+/** Amount with grouping and the currency symbol. */
+export function money(value: number, currency: string): string {
+  const c = CURRENCIES[currency] ?? CURRENCIES.USD;
+  return `${c.symbol}${plain(value, currency)}`;
 }

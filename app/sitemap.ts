@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { TEMPLATES } from "@/lib/templates";
+import { LOCALES } from "@/lib/locales";
 import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,5 +23,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...core, ...templates];
+  const localeHubs: MetadataRoute.Sitemap = LOCALES.map((l) => ({
+    url: `${SITE.url}/${l.path}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
+  const localeTemplates: MetadataRoute.Sitemap = LOCALES.flatMap((l) =>
+    l.templates.map((t) => ({
+      url: `${SITE.url}/${l.path}/${t.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }))
+  );
+
+  return [...core, ...templates, ...localeHubs, ...localeTemplates];
 }

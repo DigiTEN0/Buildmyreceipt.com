@@ -110,6 +110,21 @@ export function fromTemplate(tpl: TemplateDef): ReceiptData {
   };
 }
 
+/** Merge an arbitrary partial over the defaults. Deterministic, like `fromTemplate`. */
+export function fromSeed(seed: Partial<ReceiptData>, idPrefix = "seed"): ReceiptData {
+  const base = defaultReceipt();
+  return {
+    ...base,
+    ...seed,
+    business: { ...base.business, ...(seed.business ?? {}) },
+    meta: { ...base.meta, ...(seed.meta ?? {}) },
+    payment: { ...base.payment, ...(seed.payment ?? {}) },
+    footer: { ...base.footer, ...(seed.footer ?? {}) },
+    options: { ...base.options, ...(seed.options ?? {}) },
+    items: (seed.items ?? base.items).map((i, idx) => ({ ...i, id: `${idPrefix}-${idx}` })),
+  };
+}
+
 /**
  * Fill the clock- and random-derived fields. Call once from an effect, never
  * during render — see the note on `defaultReceipt`.

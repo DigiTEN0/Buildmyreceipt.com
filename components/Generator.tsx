@@ -9,9 +9,10 @@ import {
   computeTotals,
   emptyItem,
   hydrateVolatile,
+  fromSeed,
   PAPER_WIDTH,
 } from "@/lib/receipt";
-import { CURRENCIES } from "@/lib/currency";
+import { CURRENCIES, money } from "@/lib/currency";
 import { getTemplate, TEMPLATES } from "@/lib/templates";
 
 const PAPERS: PaperSize[] = ["58mm", "80mm", "110mm", "a4"];
@@ -122,8 +123,19 @@ function Toggle({
 
 /* ────────────────────────────── generator ────────────────────────────── */
 
-export default function Generator({ templateSlug }: { templateSlug?: string }) {
+export default function Generator({
+  templateSlug,
+  seed,
+  seedKey,
+}: {
+  templateSlug?: string;
+  /** Arbitrary starting state — used by the locale template pages. */
+  seed?: Partial<ReceiptData>;
+  /** Stable id for the seed, so item keys match between server and client. */
+  seedKey?: string;
+}) {
   const [data, setData] = useState<ReceiptData>(() => {
+    if (seed) return fromSeed(seed, seedKey ?? "seed");
     const tpl = templateSlug ? getTemplate(templateSlug) : undefined;
     return tpl ? fromTemplate(tpl) : defaultReceipt();
   });
@@ -495,9 +507,8 @@ export default function Generator({ templateSlug }: { templateSlug?: string }) {
                       }
                     />
                   </div>
-                  <span className="w-[68px] shrink-0 text-right font-mono text-[12px] tabular-nums text-ink-300">
-                    {cur.symbol}
-                    {(item.qty * item.price).toFixed(2)}
+                  <span className="w-[76px] shrink-0 truncate text-right font-mono text-[12px] tabular-nums text-ink-300">
+                    {money(item.qty * item.price, data.currency)}
                   </span>
                 </div>
               </div>
@@ -707,8 +718,7 @@ export default function Generator({ templateSlug }: { templateSlug?: string }) {
           <div className="mr-auto flex items-baseline gap-3">
             <span className="eyebrow">Preview</span>
             <span className="font-mono text-[12px] tabular-nums text-ink-300">
-              {cur.symbol}
-              {totals.total.toFixed(2)}
+              {money(totals.total, data.currency)}
             </span>
           </div>
 

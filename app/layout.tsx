@@ -105,6 +105,15 @@ function Footer() {
       ],
     },
     {
+      title: "Regions",
+      links: [
+        { href: "/in", label: "India — HRA & GST" },
+        { href: "/uk", label: "United Kingdom — VAT" },
+        { href: "/ca", label: "Canada — GST/HST" },
+        { href: "/au", label: "Australia — GST" },
+      ],
+    },
+    {
       title: "Legal",
       links: [
         { href: "/legal/terms", label: "Terms of Service" },
@@ -117,7 +126,7 @@ function Footer() {
   return (
     <footer className="no-print mt-24 border-t border-[var(--line)]">
       <div className="container-x py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(2,1fr)] lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
             <div className="flex items-center gap-2.5">
               <span
