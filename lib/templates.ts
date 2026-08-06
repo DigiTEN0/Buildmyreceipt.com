@@ -2092,6 +2092,553 @@ export const TEMPLATES: TemplateDef[] = [
       },
     },
   },
+
+  {
+    slug: "superstore-receipt",
+    name: "Superstore Receipt",
+    h1: "Superstore Receipt Generator",
+    category: "Retail",
+    blurb: "Big-box supercenter format — store number, long basket, tax flags, items-sold count.",
+    intent:
+      "Create a big-box superstore receipt in the format major supercenters use — store and register numbers, a long itemised basket, taxable flags, tender and change, and a scannable barcode.",
+    sections: [
+      {
+        heading: "How supercenter receipts are laid out",
+        body: [
+          "Big-box superstore receipts follow a very consistent structure: a centred store block with the location and store number, a line of transaction metadata (date, time, operator, register, and a long transaction or TC number), then a dense product list where each line carries an item description and, often, a per-line tax flag.",
+          "Below the basket sits the summary — a subtotal, the tax broken out by rate, the grand total, the tender type and amount, and the change given. Most chains close with an items-sold count and a barcode encoding the transaction for returns lookup.",
+        ],
+      },
+      {
+        heading: "Tax flags and mixed baskets",
+        body: [
+          "The defining detail of a supercenter receipt is mixed taxability across one basket: grocery staples are frequently zero-rated while general merchandise is taxed. Real receipts show this with a per-line letter flag — commonly N, X, O or T — next to each item.",
+          "This generator applies a single blended rate for simplicity. If you want the per-line flags shown, append the letter to each item description; it will print as part of the line.",
+        ],
+      },
+      {
+        heading: "Use a name that is yours",
+        body: [
+          "Enter your own store name and details. This template reproduces the layout conventions of large retailers, not any particular company's branding — do not enter another business's name, logo or trademarks as if the receipt were issued by them.",
+        ],
+      },
+    ],
+    fields: [
+      "Store name, address and store number",
+      "Operator, register and transaction number",
+      "Itemised basket with tax flags",
+      "Subtotal, tax, total, tender and change",
+      "Items-sold count and barcode",
+    ],
+    faqs: [
+      {
+        q: "Why do some items have a letter next to the price?",
+        a: "That is a tax flag showing whether the item is taxable and at what rate. Append the letter to the item description to reproduce it.",
+      },
+      {
+        q: "What paper size do supercenters use?",
+        a: "80mm thermal roll, which is the default here. Long baskets simply produce a longer receipt.",
+      },
+      {
+        q: "Can I show the number of items sold?",
+        a: "Yes — add it as a footer line, e.g. '# ITEMS SOLD 14'.",
+      },
+    ],
+    related: ["grocery-receipt", "warehouse-club-receipt", "retail-receipt", "itemized-receipt"],
+    seed: {
+      style: "retail",
+      paper: "80mm",
+      business: {
+        name: "ValuMart Supercenter",
+        address: "5100 Commerce Parkway",
+        cityLine: "Dayton, OH 45402",
+        phone: "(937) 555-0148",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 7.5,
+      taxLabel: "Tax 1",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "OP 442817",
+        transactionId: "",
+        register: "REG 12",
+        storeNumber: "ST 2284",
+      },
+      items: [
+        { id: "1", qty: 1, name: "GV MILK 1GAL  N", price: 3.24 },
+        { id: "2", qty: 1, name: "WHITE BREAD  N", price: 1.28 },
+        { id: "3", qty: 2, name: "PASTA SAUCE  N", price: 1.94 },
+        { id: "4", qty: 1, name: "PAPER TOWELS 6PK  X", price: 9.97 },
+        { id: "5", qty: 1, name: "LAUNDRY DET  X", price: 11.97 },
+        { id: "6", qty: 3, name: "BANANAS LB  N", price: 0.52 },
+        { id: "7", qty: 1, name: "PHONE CHARGER  X", price: 14.88 },
+        { id: "8", qty: 2, name: "SPARKLING WTR  N", price: 3.98 },
+      ],
+      footer: {
+        headline: "# ITEMS SOLD 12",
+        lines: ["Low prices you can trust. Every day.", "Returns within 90 days with receipt"],
+        showBarcode: true,
+        showSurvey: true,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "warehouse-club-receipt",
+    name: "Warehouse Club Receipt",
+    h1: "Warehouse Club Receipt Generator",
+    category: "Retail",
+    blurb: "Membership warehouse format — member number, bulk items, taxable 'E' flags, total items.",
+    intent:
+      "Create a warehouse club receipt in the membership-wholesale format — member number, bulk quantities, per-line taxable flags and a total item count.",
+    sections: [
+      {
+        heading: "What sets a warehouse club receipt apart",
+        body: [
+          "Membership warehouse receipts read differently from ordinary retail: they carry a member number, list items by a short code plus an abbreviated description, and sell in bulk multipacks. Taxable lines are usually flagged with a trailing letter such as 'E'.",
+          "The summary shows a subtotal, tax, and a total, followed by the tender and, distinctively, a count of total items — warehouse clubs almost always print how many units left the building.",
+        ],
+      },
+      {
+        heading: "Item codes and bulk pricing",
+        body: [
+          "Each line typically leads with an item number and an abbreviated, uppercase description — the format is optimised for a narrow column, so descriptions are terse. Enter items the same way for an authentic look.",
+          "Because the model is bulk, quantities above one are common; the per-unit price prints under the line when quantity exceeds one.",
+        ],
+      },
+      {
+        heading: "Use your own club or store name",
+        body: [
+          "This template follows the layout conventions of membership warehouses generally. Enter your own business name — do not present the receipt as though issued by a specific real club.",
+        ],
+      },
+    ],
+    fields: [
+      "Warehouse name, location and number",
+      "Member number",
+      "Item codes with bulk quantities",
+      "Taxable flags, subtotal, tax, total",
+      "Total items and tender",
+    ],
+    faqs: [
+      {
+        q: "What does the 'E' next to a price mean?",
+        a: "It flags the line as taxable. Append it to the item description to reproduce it.",
+      },
+      {
+        q: "How do I show the member number?",
+        a: "Use the transaction field, or add it as a meta line — warehouse receipts print it near the top.",
+      },
+      {
+        q: "Why is the total item count shown?",
+        a: "Membership warehouses print the number of units sold as a loss-prevention and checkout-verification convention.",
+      },
+    ],
+    related: ["superstore-receipt", "grocery-receipt", "retail-receipt", "itemized-receipt"],
+    seed: {
+      style: "retail",
+      paper: "80mm",
+      business: {
+        name: "Harbor Wholesale Club",
+        address: "8800 Industrial Blvd",
+        cityLine: "Fresno, CA 93725",
+        phone: "(559) 555-0172",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 7.975,
+      taxLabel: "Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "MEMBER 118 224 771",
+        transactionId: "",
+        register: "WHSE 08",
+        storeNumber: "",
+      },
+      items: [
+        { id: "1", qty: 1, name: "1841 ROTISSERIE CHKN", price: 4.99 },
+        { id: "2", qty: 1, name: "2207 KS WATER 40PK  E", price: 3.79 },
+        { id: "3", qty: 1, name: "9910 OLIVE OIL 2L", price: 15.99 },
+        { id: "4", qty: 2, name: "4471 PAPER TOWEL 12  E", price: 19.99 },
+        { id: "5", qty: 1, name: "8823 GROUND COFFEE 3LB", price: 13.49 },
+        { id: "6", qty: 1, name: "3140 MIXED NUTS 2.5LB", price: 16.99 },
+      ],
+      footer: {
+        headline: "TOTAL ITEMS SOLD 7",
+        lines: ["Member savings applied", "Thank you — see you next visit"],
+        showBarcode: true,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "online-order-receipt",
+    name: "Online Order Receipt",
+    h1: "Online Order Confirmation Receipt Generator",
+    category: "Online",
+    blurb: "E-commerce order confirmation — order number, ship-to, items sold by, shipping and tax.",
+    intent:
+      "Create an online order confirmation in the e-commerce format — order number, shipping address, items with seller, order subtotal, shipping, tax and order total.",
+    sections: [
+      {
+        heading: "An order confirmation, not a till receipt",
+        body: [
+          "Online marketplace receipts are order confirmations: they are emailed rather than printed, laid out on the full page width, and structured around an order number, a ship-to address, and a list of items each showing the seller and quantity.",
+          "The money summary is itemised as order subtotal, shipping and handling, estimated tax, and an order total — with the payment method and billing reference below. This template defaults to A4 because that is how these documents are read and filed.",
+        ],
+      },
+      {
+        heading: "Order numbers and sellers",
+        body: [
+          "The order number is the key a customer quotes for support and the reference finance teams match against a card statement. Put it in the transaction field.",
+          "Marketplaces list the seller beside each item because a single order can span multiple third-party sellers. Include the seller in the item description where you want that detail.",
+        ],
+      },
+      {
+        heading: "Use it for your own orders",
+        body: [
+          "This reproduces the general layout of e-commerce confirmations, not any specific marketplace's branding. Use it to reconstruct a confirmation for an order you actually placed or fulfilled.",
+        ],
+      },
+    ],
+    fields: [
+      "Store or marketplace name",
+      "Order number and order date",
+      "Ship-to address",
+      "Items with seller and quantity",
+      "Subtotal, shipping, tax, order total",
+    ],
+    faqs: [
+      {
+        q: "Should this be A4 or thermal?",
+        a: "A4 or Letter — online order confirmations are emailed documents, not till roll.",
+      },
+      {
+        q: "Where does the order number go?",
+        a: "The transaction field. It is the reference used for support and statement matching.",
+      },
+      {
+        q: "How do I show the seller for each item?",
+        a: "Add 'Sold by …' to the item description; marketplaces print the seller per line.",
+      },
+    ],
+    related: ["itemized-receipt", "electronics-receipt", "marketplace-resale-receipt", "invoice-receipt"],
+    seed: {
+      style: "simple",
+      paper: "a4",
+      business: {
+        name: "Meridian Marketplace",
+        address: "Order Confirmation",
+        cityLine: "Seattle, WA 98108",
+        phone: "",
+        website: "meridianmarket.example",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 8.9,
+      taxLabel: "Estimated Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "",
+        transactionId: "",
+        register: "",
+        storeNumber: "",
+      },
+      items: [
+        { id: "1", qty: 1, name: "Wireless Earbuds (Sold by AudioNest)", price: 49.99 },
+        { id: "2", qty: 2, name: "USB-C Cable 2m (Sold by CableCo)", price: 8.49 },
+        { id: "3", qty: 1, name: "Phone Stand Aluminium", price: 15.95 },
+        { id: "4", qty: 1, name: "Shipping & Handling", price: 5.99 },
+      ],
+      payment: { method: "Visa", last4: "4892", approvalCode: "", changeDue: 0 },
+      footer: {
+        headline: "ORDER CONFIRMED",
+        lines: [
+          "Order # 114-7729183-4471882",
+          "Ship to: A. Reyes, 214 Hoyt St, Brooklyn NY 11201",
+          "Arriving Tue — track in Your Orders",
+        ],
+        showBarcode: false,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "marketplace-resale-receipt",
+    name: "Resale Marketplace Receipt",
+    h1: "Resale Marketplace Order Receipt Generator",
+    category: "Online",
+    blurb: "Sneaker/streetwear resale format — order number, size, condition, price, processing and shipping.",
+    intent:
+      "Create a resale-marketplace order receipt in the sneaker and streetwear format — order number, item with size and condition, purchase price, processing fee, shipping and total.",
+    sections: [
+      {
+        heading: "The resale order layout",
+        body: [
+          "Resale marketplaces confirm a purchase with an order number, the item name, its size and condition, and a price breakdown that separates the purchase price from a processing fee and shipping. Because these platforms sit between a buyer and a third-party seller, the fee lines are explicit.",
+          "The document is an emailed confirmation, so this template uses the full-page layout. Enter the order number in the transaction field.",
+        ],
+      },
+      {
+        heading: "Size, condition and fees",
+        body: [
+          "Put the size and condition in the item description — 'Size 10 / New' is the convention. Add the processing fee and shipping as their own lines so the breakdown matches what these platforms show.",
+          "Keep the purchase price, fees and shipping separate rather than rolling them into one figure; the itemised breakdown is the whole point of a resale confirmation.",
+        ],
+      },
+      {
+        heading: "A note on authenticity claims",
+        body: [
+          "This template reproduces the general format of resale confirmations. It does not, and should not, be used to assert that a specific item is authentic or was verified by a real marketplace. Enter your own transaction details only.",
+        ],
+      },
+    ],
+    fields: [
+      "Marketplace or store name",
+      "Order number",
+      "Item with size and condition",
+      "Purchase price, processing fee, shipping",
+      "Order total and payment",
+    ],
+    faqs: [
+      {
+        q: "How do I show size and condition?",
+        a: "Add them to the item description, e.g. 'Trainer — Size 10 / New'.",
+      },
+      {
+        q: "Should fees be separate lines?",
+        a: "Yes. Resale confirmations always break out the processing fee and shipping from the item price.",
+      },
+      {
+        q: "Is this A4 or thermal?",
+        a: "A4 or Letter — these are emailed order confirmations.",
+      },
+    ],
+    related: ["online-order-receipt", "clothing-receipt", "electronics-receipt", "itemized-receipt"],
+    seed: {
+      style: "simple",
+      paper: "a4",
+      business: {
+        name: "ReSole Market",
+        address: "Order Confirmation",
+        cityLine: "Jersey City, NJ 07302",
+        phone: "",
+        website: "resolemarket.example",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 0,
+      taxLabel: "Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "",
+        transactionId: "",
+        register: "",
+        storeNumber: "",
+      },
+      items: [
+        { id: "1", qty: 1, name: "Retro Court Trainer — Size 10 / New", price: 210.0 },
+        { id: "2", qty: 1, name: "Processing Fee", price: 12.5 },
+        { id: "3", qty: 1, name: "Shipping", price: 13.95 },
+      ],
+      payment: { method: "PayPal", last4: "", approvalCode: "", changeDue: 0 },
+      footer: {
+        headline: "PURCHASE CONFIRMED",
+        lines: ["Order # RS-4471-8829", "Ships to: M. Okafor", "Est. delivery 5–7 business days"],
+        showBarcode: false,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "fast-food-receipt",
+    name: "Fast Food Receipt",
+    h1: "Fast Food Receipt Generator",
+    category: "Food & Drink",
+    blurb: "Quick-service format — order number, eat-in/takeout, combo meals, tax and tender.",
+    intent:
+      "Create a fast-food receipt in the quick-service format — order number, dine-in or takeout, combo meals with modifiers, tax, tender and change.",
+    sections: [
+      {
+        heading: "Quick-service receipt conventions",
+        body: [
+          "Fast-food receipts are built around a prominent order number used to call the order, a dine-in or takeout marker, and a compact list of combos and items. Meals are usually shown as a named combo with the drink and side indented beneath.",
+          "The summary is a subtotal, tax, total, tender and change. These print on narrow thermal roll, so this template defaults to 58mm and a condensed layout.",
+        ],
+      },
+      {
+        heading: "Combos and modifiers",
+        body: [
+          "Enter a combo as a parent line at its price, then list the included or upgraded items beneath it. Paid upgrades carry their own price; included items can be shown at zero, which still prints.",
+          "The order number is what the counter calls, so it belongs in the transaction field where it prints prominently.",
+        ],
+      },
+    ],
+    fields: [
+      "Restaurant name and location",
+      "Order number and dine-in/takeout",
+      "Combos and items with modifiers",
+      "Subtotal, tax, total",
+      "Tender and change",
+    ],
+    faqs: [
+      {
+        q: "How do I show a combo meal?",
+        a: "A parent line for the combo, with the drink and side indented beneath it.",
+      },
+      {
+        q: "Where does the order number print?",
+        a: "The transaction field — it prints prominently, as counter staff call it.",
+      },
+      {
+        q: "What size is a fast-food receipt?",
+        a: "58mm thermal, the default here.",
+      },
+    ],
+    related: ["restaurant-receipt", "cafe-receipt", "food-delivery-receipt", "bar-receipt"],
+    seed: {
+      style: "restaurant",
+      paper: "58mm",
+      business: {
+        name: "Route 9 Burgers",
+        address: "1400 Highway 9",
+        cityLine: "Columbus, OH 43206",
+        phone: "",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 7.5,
+      taxLabel: "Tax",
+      showTip: false,
+      tipRate: 0,
+      options: { density: "condensed", fade: 0, curl: true, torn: true, uppercase: true },
+      meta: {
+        date: "",
+        time: "",
+        cashier: "TILL 2",
+        transactionId: "ORDER 087",
+        register: "TAKEOUT",
+        storeNumber: "",
+      },
+      items: [
+        { id: "1", qty: 1, name: "Classic Combo Meal", price: 8.49 },
+        { id: "2", qty: 1, name: "  Cheeseburger", price: 0 },
+        { id: "3", qty: 1, name: "  Fries — Large", price: 0.6 },
+        { id: "4", qty: 1, name: "  Cola — Medium", price: 0 },
+        { id: "5", qty: 1, name: "Chicken Nuggets 6pc", price: 4.29 },
+        { id: "6", qty: 1, name: "Apple Pie", price: 1.49 },
+      ],
+      payment: { method: "Cash", last4: "", approvalCode: "", changeDue: 5.13 },
+      footer: {
+        headline: "THANK YOU — ORDER 087",
+        lines: ["Tell us how we did", "Survey code on receipt"],
+        showBarcode: false,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "peer-payment-receipt",
+    name: "Peer Payment Receipt",
+    h1: "Payment App Receipt Generator",
+    category: "Business",
+    blurb: "Money-transfer app format — payment sent, from/to, amount, note and payment ID.",
+    intent:
+      "Create a payment-app receipt in the peer-to-peer transfer format — payment sent or received, sender and recipient, amount, note and a payment identifier.",
+    sections: [
+      {
+        heading: "The transfer confirmation layout",
+        body: [
+          "Payment-app receipts are minimal by design: a headline status ('Payment Sent' or 'Payment Received'), the sender and recipient, a large amount, an optional note describing what it was for, the date, and a unique payment identifier.",
+          "There is no tax and no basket — it is a record of money moving between two people. Put the amount as a single line item and the payment ID in the transaction field.",
+        ],
+      },
+      {
+        heading: "From, to and note",
+        body: [
+          "Name both parties clearly and keep the note specific — 'For June rent' or 'Split dinner' — because the note is what makes the transfer reconcilable later.",
+          "Use the footer for the from/to lines and the payment status, and set the payment method to match the funding source shown on the confirmation.",
+        ],
+      },
+    ],
+    fields: [
+      "App or service name",
+      "Sender and recipient",
+      "Amount and note",
+      "Date and payment ID",
+      "Funding source",
+    ],
+    faqs: [
+      {
+        q: "Is there any tax on a peer payment?",
+        a: "No — leave the tax rate at zero. It is a transfer, not a sale.",
+      },
+      {
+        q: "Where does the payment ID go?",
+        a: "The transaction field. Payment apps always show a unique identifier for the transfer.",
+      },
+      {
+        q: "How do I record what it was for?",
+        a: "Use the note — put it in the item description or a footer line.",
+      },
+    ],
+    related: ["cash-receipt", "invoice-receipt", "rent-receipt", "deposit-receipt"],
+    seed: {
+      style: "simple",
+      paper: "a4",
+      business: {
+        name: "QuickPay",
+        address: "Payment Confirmation",
+        cityLine: "",
+        phone: "",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 0,
+      taxLabel: "Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "",
+        transactionId: "",
+        register: "",
+        storeNumber: "",
+      },
+      items: [{ id: "1", qty: 1, name: "Payment — For June rent", price: 950.0 }],
+      payment: { method: "Bank Transfer", last4: "", approvalCode: "", changeDue: 0 },
+      footer: {
+        headline: "PAYMENT SENT",
+        lines: ["From: J. Whitfield", "To: Hollis Property Mgmt", "Payment ID: QP-4471-88213-09"],
+        showBarcode: false,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
 ];
 
 export const TEMPLATE_MAP = new Map(TEMPLATES.map((t) => [t.slug, t]));

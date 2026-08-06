@@ -53,7 +53,7 @@ function Header() {
     <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(242,245,250,.82)] backdrop-blur-xl">
       <div className="container-x flex h-14 items-center justify-between gap-6">
         <Link href="/" className="shrink-0" aria-label={SITE.name}>
-          <Logo size={28} />
+          <Logo size={36} />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
@@ -120,7 +120,7 @@ function Footer() {
       <div className="container-x py-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(2,1fr)] lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
-            <Logo size={28} />
+            <Logo size={32} />
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-400">
               A fast, free receipt generator for business record-keeping. Built for people
               who take cash and need to hand over something that looks right.

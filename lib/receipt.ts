@@ -1,5 +1,51 @@
-import type { ReceiptData, LineItem, PaperSize } from "./types";
+import type { ReceiptData, LineItem, PaperSize, LayoutBlock, SectionId } from "./types";
 import type { TemplateDef } from "./types";
+
+/** Default block order + visibility for the receipt builder's layers panel. */
+export const DEFAULT_LAYOUT: LayoutBlock[] = [
+  { id: "logo", visible: true },
+  { id: "business", visible: true },
+  { id: "meta", visible: true },
+  { id: "items", visible: true },
+  { id: "totals", visible: true },
+  { id: "payment", visible: true },
+  { id: "promo", visible: true },
+  { id: "footer", visible: true },
+  { id: "barcode", visible: true },
+];
+
+export const SECTION_LABELS: Record<SectionId, string> = {
+  logo: "Logo",
+  business: "Business header",
+  meta: "Date & transaction",
+  items: "Line items",
+  totals: "Totals",
+  payment: "Payment",
+  promo: "Savings / promo",
+  footer: "Footer message",
+  barcode: "Barcode",
+};
+
+/**
+ * Guarantee a full, well-formed layout: keep the caller's order/visibility,
+ * append any sections they're missing, drop anything unknown. Lets old data
+ * and template seeds without a layout still render every block.
+ */
+export function normalizeLayout(layout?: LayoutBlock[]): LayoutBlock[] {
+  const known = new Set(DEFAULT_LAYOUT.map((b) => b.id));
+  const seen = new Set<SectionId>();
+  const result: LayoutBlock[] = [];
+  for (const b of layout ?? []) {
+    if (known.has(b.id) && !seen.has(b.id)) {
+      result.push({ id: b.id, visible: b.visible !== false });
+      seen.add(b.id);
+    }
+  }
+  for (const b of DEFAULT_LAYOUT) {
+    if (!seen.has(b.id)) result.push({ ...b });
+  }
+  return result;
+}
 
 export const PAPER_WIDTH: Record<PaperSize, { px: number; cols: number; label: string }> = {
   "58mm": { px: 260, cols: 32, label: "58mm — compact thermal" },
