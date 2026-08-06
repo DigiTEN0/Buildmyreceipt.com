@@ -1,5 +1,22 @@
 export type PaperSize = "58mm" | "80mm" | "110mm" | "a4";
 
+/** Movable/hideable blocks on the receipt, in the builder's "layers" panel. */
+export type SectionId =
+  | "logo"
+  | "business"
+  | "meta"
+  | "items"
+  | "totals"
+  | "payment"
+  | "promo"
+  | "footer"
+  | "barcode";
+
+export interface LayoutBlock {
+  id: SectionId;
+  visible: boolean;
+}
+
 export type StyleId =
   | "thermal"
   | "retail"
