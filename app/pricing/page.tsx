@@ -3,9 +3,9 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing — Free Receipt Generator, Optional Pro",
+  title: "Pricing — Free Receipt Maker, Optional Pro",
   description:
-    "The receipt generator is free with no signup and no watermark. Pro adds saved businesses, receipt history, bulk export and accounting integrations.",
+    "The receipt maker is free with no signup and no watermark. Pro adds saved businesses, receipt history, bulk export and accounting integrations.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -20,7 +20,7 @@ const TIERS = [
       "Unlimited receipts",
       "No watermark",
       "All 24 templates",
-      "PNG and PDF export at 3×",
+      "PNG, PDF and JPEG export at 3×",
       "58mm, 80mm, 110mm and A4",
       "14 currencies",
       "Your own logo",
@@ -65,11 +65,11 @@ const TIERS = [
 export default function Pricing() {
   return (
     <>
-      <div className="border-b border-[var(--line)]">
+      <div className="hero-mesh border-b border-[var(--line)]">
         <div className="container-x py-14 text-center">
-          <p className="eyebrow mb-3">Pricing</p>
-          <h1 className="mx-auto max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
-            The generator is free. Properly free.
+          <p className="eyebrow mb-3 justify-center">Pricing</p>
+          <h1 className="mx-auto max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-extrabold leading-[1.03] tracking-[-0.035em] text-ink-50">
+            The receipt maker is free. Properly free.
           </h1>
           <p className="mx-auto mt-5 max-w-[58ch] text-[16px] leading-relaxed text-ink-300">
             No signup, no watermark, no cap on how many you make. Paid plans exist for

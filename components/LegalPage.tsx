@@ -32,7 +32,7 @@ export default function LegalPage({
               <li className="text-ink-300">Legal</li>
             </ol>
           </nav>
-          <h1 className="font-display text-[clamp(1.9rem,4.2vw,2.6rem)] font-semibold tracking-[-0.033em]">
+          <h1 className="font-display text-[clamp(1.9rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.033em] text-ink-50">
             {title}
           </h1>
           <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.13em] text-ink-500">

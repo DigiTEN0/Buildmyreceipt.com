@@ -18,11 +18,11 @@ export async function generateMetadata({
   const tpl = getTemplate(slug);
   if (!tpl) return {};
   return {
-    title: `${tpl.h1} — Free ${tpl.name} Template`,
-    description: tpl.intent,
+    title: `${tpl.h1} — Free ${tpl.name} Maker`,
+    description: `${tpl.intent} Free, no signup — download as PNG, PDF or JPEG.`,
     alternates: { canonical: `/templates/${tpl.slug}` },
     openGraph: {
-      title: `${tpl.h1} — Free & Online`,
+      title: `${tpl.h1} — Free Receipt Maker`,
       description: tpl.intent,
       url: `${SITE.url}/templates/${tpl.slug}`,
     },
@@ -86,7 +86,7 @@ export default async function TemplatePage({
       />
 
       {/* header */}
-      <div className="no-print border-b border-[var(--line)]">
+      <div className="no-print hero-mesh border-b border-[var(--line)]">
         <div className="container-x py-10">
           <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.11em] text-ink-500">
@@ -106,12 +106,12 @@ export default async function TemplatePage({
             </ol>
           </nav>
 
-          <h1 className="max-w-4xl font-display text-[clamp(1.9rem,4.4vw,2.8rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
+          <h1 className="max-w-4xl font-display text-[clamp(1.9rem,4.4vw,2.8rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-ink-50">
             {tpl.h1}
           </h1>
           <p className="mt-4 max-w-[64ch] text-[16px] leading-relaxed text-ink-300">
-            {tpl.intent} Free, no signup, and the generator below is already loaded with this
-            format.
+            {tpl.intent} Free, no signup, and the receipt maker below is already loaded with
+            this format — customize it and download as PNG, PDF or JPEG.
           </p>
 
           <ul className="mt-7 flex flex-wrap gap-2">

@@ -4,8 +4,8 @@ import { TEMPLATES, CATEGORIES, templatesByCategory } from "@/lib/templates";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Receipt Templates — Every Format, Free",
-  description: `Browse ${TEMPLATES.length} free receipt templates: restaurant, grocery, retail, fuel, taxi, hotel, rent, donation, medical, trade and more. Each loads a working generator preset.`,
+  title: `${TEMPLATES.length} Free Receipt Templates — Receipt Maker Presets`,
+  description: `Browse ${TEMPLATES.length} free receipt templates: restaurant, grocery, retail, fuel, taxi, hotel, rent, donation, medical, trade and more. Each opens the receipt maker preloaded and ready to download as PNG, PDF or JPEG.`,
   alternates: { canonical: "/templates" },
 };
 
@@ -30,16 +30,16 @@ export default function TemplatesIndex() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="border-b border-[var(--line)]">
+      <div className="hero-mesh border-b border-[var(--line)]">
         <div className="container-x py-14">
           <p className="eyebrow mb-3">Templates</p>
-          <h1 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
-            {TEMPLATES.length} receipt formats, each with a working preset
+          <h1 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-extrabold leading-[1.03] tracking-[-0.035em] text-ink-50">
+            {TEMPLATES.length} free receipt templates, each with a working preset
           </h1>
           <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ink-300">
-            Every template opens the generator preloaded with the fields that format needs —
-            the right paper width, the right tax label, realistic line items. Change what you
-            need and download.
+            Every template opens the receipt maker preloaded with the fields that format needs
+            — the right paper width, the right tax label, realistic line items. Change what you
+            need and download as PNG, PDF or JPEG.
           </p>
         </div>
       </div>

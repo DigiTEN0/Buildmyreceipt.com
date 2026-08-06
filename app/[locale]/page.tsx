@@ -78,7 +78,7 @@ export default async function LocaleHub({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="border-b border-[var(--line)]">
+      <div className="hero-mesh border-b border-[var(--line)]">
         <div className="container-x py-14">
           <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.11em] text-ink-500">
@@ -92,8 +92,8 @@ export default async function LocaleHub({
             </ol>
           </nav>
 
-          <h1 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
-            Receipt generator for {l.country}
+          <h1 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3rem)] font-extrabold leading-[1.03] tracking-[-0.035em] text-ink-50">
+            Free receipt maker for {l.country}
           </h1>
 
           <div className="mt-5 max-w-[64ch] space-y-3">

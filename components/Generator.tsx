@@ -139,7 +139,7 @@ export default function Generator({
     const tpl = templateSlug ? getTemplate(templateSlug) : undefined;
     return tpl ? fromTemplate(tpl) : defaultReceipt();
   });
-  const [busy, setBusy] = useState<null | "png" | "pdf">(null);
+  const [busy, setBusy] = useState<null | "png" | "jpeg" | "pdf">(null);
   const [toast, setToast] = useState<string | null>(null);
   // Free downloads carry a watermark; removing it is the Pro upgrade.
   const [watermark, setWatermark] = useState(true);
@@ -218,15 +218,20 @@ export default function Generator({
     });
   };
 
-  const downloadPng = async () => {
-    setBusy("png");
+  const downloadImage = async (format: "png" | "jpeg") => {
+    setBusy(format);
     try {
-      const url = await capture();
+      const node = paperRef.current;
+      if (!node) throw new Error("Nothing to export");
+      const { toPng, toJpeg } = await import("html-to-image");
+      const opts = { pixelRatio: 3, backgroundColor: "#ffffff", cacheBust: true } as const;
+      const url =
+        format === "jpeg" ? await toJpeg(node, { ...opts, quality: 0.96 }) : await toPng(node, opts);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${filename()}.png`;
+      a.download = `${filename()}.${format === "jpeg" ? "jpg" : "png"}`;
       a.click();
-      setToast("PNG downloaded");
+      setToast(`${format.toUpperCase()} downloaded`);
     } catch {
       setToast("Export failed — try again");
     } finally {
@@ -780,10 +785,18 @@ export default function Generator({
           <button
             type="button"
             className="btn btn-ghost"
-            onClick={downloadPng}
+            onClick={() => downloadImage("png")}
             disabled={busy !== null}
           >
             {busy === "png" ? "Exporting…" : "PNG"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => downloadImage("jpeg")}
+            disabled={busy !== null}
+          >
+            {busy === "jpeg" ? "Exporting…" : "JPEG"}
           </button>
           <button
             type="button"

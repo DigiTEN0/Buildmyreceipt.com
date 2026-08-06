@@ -35,7 +35,7 @@ export default function HeroInteractive() {
       <div className="warm-wash pointer-events-none absolute -inset-10 -z-10 rounded-[40px]" aria-hidden="true" />
 
       {/* switcher */}
-      <div className="mb-5 flex flex-wrap justify-center gap-2 lg:justify-start">
+      <div className="mb-6 flex flex-wrap justify-center gap-2 lg:justify-start">
         {PICKS.map((p) => {
           const on = p.slug === active;
           return (
@@ -44,12 +44,12 @@ export default function HeroInteractive() {
               type="button"
               onClick={() => setActive(p.slug)}
               aria-pressed={on}
-              className={`rounded-full border px-3 py-1.5 text-[12.5px] font-medium transition-all duration-150 ${
+              className={`rounded-full border px-3.5 py-1.5 text-[12.5px] font-semibold transition-all duration-150 ${
                 on
-                  ? "border-transparent text-[var(--on-accent)] shadow-[0_6px_16px_-6px_rgba(249,84,42,.5)]"
-                  : "border-[var(--line-2)] bg-[var(--surface)] text-ink-300 hover:border-ink-500"
+                  ? "border-transparent text-[var(--on-accent)] shadow-[var(--shadow-glow)]"
+                  : "border-[var(--line-2)] bg-[var(--surface)] text-ink-300 hover:border-ink-500 hover:text-ink-100"
               }`}
-              style={on ? { background: "var(--accent)" } : undefined}
+              style={on ? { background: "var(--grad-warm)" } : undefined}
             >
               {p.label}
             </button>
@@ -63,7 +63,7 @@ export default function HeroInteractive() {
           <div
             key={active}
             className="animate-slide-up origin-top"
-            style={{ transform: "rotate(-1deg) scale(.92)" }}
+            style={{ transform: "rotate(-1.4deg) scale(.94)" }}
           >
             {data ? (
               <Receipt data={data} />
@@ -77,43 +77,32 @@ export default function HeroInteractive() {
           </div>
 
           {/* live total chip */}
-          <div className="absolute -right-3 top-6 hidden rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3.5 py-2 shadow-[var(--shadow-2)] sm:block">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">
-              Total
+          <div className="absolute -right-3 top-6 hidden rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3.5 py-2.5 shadow-[var(--shadow-2)] sm:block">
+            <div className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--mint)" }} />
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">
+                Live total
+              </span>
             </div>
-            <div className="font-display text-lg font-semibold tabular-nums tracking-[-0.02em]">
+            <div className="mt-0.5 font-display text-xl font-extrabold tabular-nums tracking-[-0.02em] text-ink-50">
               {total}
             </div>
           </div>
-        </div>
 
-        {/* feature ticks — desktop only, kept compact */}
-        <ul className="hidden shrink-0 space-y-3 pt-8 xl:block">
-          {[
-            "Real thermal print",
-            "Live totals",
-            "Your logo",
-            "PNG · PDF · JPG",
-            "No signup",
-          ].map((f) => (
-            <li key={f} className="flex items-center gap-2.5 text-[13px] text-ink-300">
-              <span
-                className="grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold text-[var(--on-accent)]"
-                style={{ background: "var(--accent)" }}
-                aria-hidden="true"
-              >
-                ✓
-              </span>
-              {f}
-            </li>
-          ))}
-        </ul>
+          {/* export badge */}
+          <div className="absolute -left-4 bottom-10 hidden rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 shadow-[var(--shadow-2)] sm:block">
+            <div className="font-mono text-[9px] uppercase tracking-[0.13em] text-[var(--accent-600)]">
+              Export
+            </div>
+            <div className="mt-0.5 text-[12px] font-bold text-ink-100">PNG · PDF · JPEG</div>
+          </div>
+        </div>
       </div>
 
-      <p className="mt-5 text-center text-[12px] text-ink-400 lg:text-left">
-        Click a format above to preview it —{" "}
+      <p className="mt-6 text-center text-[12.5px] text-ink-400 lg:text-left">
+        Tap a format to preview it live —{" "}
         <Link href="/generator" className="link">
-          or open the editor
+          or open the full editor
         </Link>
         .
       </p>
