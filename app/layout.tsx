@@ -3,6 +3,7 @@ import { Inter, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { SITE, NAV } from "@/lib/site";
+import Logo from "@/components/Logo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const display = Instrument_Sans({
@@ -42,26 +43,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#f4f1ea",
+  themeColor: "#f2f5fa",
   width: "device-width",
   initialScale: 1,
 };
 
 function Header() {
   return (
-    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(244,241,234,.82)] backdrop-blur-xl">
+    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(242,245,250,.82)] backdrop-blur-xl">
       <div className="container-x flex h-14 items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label={SITE.name}>
-          <span
-            className="grid h-7 w-7 place-items-center rounded-md text-[13px] font-bold"
-            style={{ background: "var(--accent)", color: "#fff" }}
-            aria-hidden="true"
-          >
-            ▤
-          </span>
-          <span className="font-display text-[15px] font-semibold tracking-[-0.02em]">
-            BuildMyReceipt
-          </span>
+        <Link href="/" className="shrink-0" aria-label={SITE.name}>
+          <Logo size={28} />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
@@ -128,18 +120,7 @@ function Footer() {
       <div className="container-x py-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(2,1fr)] lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span
-                className="grid h-7 w-7 place-items-center rounded-md text-[13px] font-bold"
-                style={{ background: "var(--accent)", color: "#fff" }}
-                aria-hidden="true"
-              >
-                ▤
-              </span>
-              <span className="font-display text-[15px] font-semibold tracking-[-0.02em]">
-                BuildMyReceipt
-              </span>
-            </div>
+            <Logo size={28} />
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-400">
               A fast, free receipt generator for business record-keeping. Built for people
               who take cash and need to hand over something that looks right.

@@ -4,26 +4,26 @@
 
 /* ─────────────────────────── light design system ─────────────────────────── */
 :root {
-  --paper: #f4f1ea;      /* warm page background */
-  --bg-2: #ece7dd;       /* slightly deeper warm tint (hover / bands) */
+  --paper: #f2f5fa;      /* cool page background, matches the navy/blue brand */
+  --bg-2: #e6ecf5;       /* deeper cool tint (hover / bands) */
   --surface: #ffffff;    /* cards */
-  --surface-2: #faf7f1;  /* inset surfaces / inputs */
-  --line: #e5dfd3;       /* hairline */
-  --line-2: #d8d1c2;     /* stronger hairline / input border */
+  --surface-2: #f6f9fd;  /* inset surfaces / inputs */
+  --line: #e1e7f1;       /* hairline */
+  --line-2: #d0d9e8;     /* stronger hairline / input border */
 
-  --ink: #1b1813;
-  --ink-2: #4f493e;
-  --ink-3: #8b8477;
+  --ink: #16202e;        /* navy near-black — the wordmark colour */
+  --ink-2: #46515f;
+  --ink-3: #7c8695;
 
-  --accent: #f9542a;
-  --accent-600: #e0400f;
-  --accent-soft: #ffe7dd;
+  --accent: #1f8ff2;     /* brand blue — the checkmark */
+  --accent-600: #1670c4;
+  --accent-soft: #e4f1fd;
   --on-accent: #ffffff;
 
-  --amber: #ffb23e;
-  --shadow-1: 0 1px 2px rgba(40, 30, 15, 0.05), 0 1px 3px rgba(40, 30, 15, 0.06);
-  --shadow-2: 0 4px 12px -2px rgba(40, 30, 15, 0.08), 0 2px 6px -2px rgba(40, 30, 15, 0.06);
-  --shadow-3: 0 24px 48px -16px rgba(40, 30, 15, 0.18), 0 8px 20px -8px rgba(40, 30, 15, 0.1);
+  --navy: #16202e;
+  --shadow-1: 0 1px 2px rgba(22, 32, 46, 0.05), 0 1px 3px rgba(22, 32, 46, 0.06);
+  --shadow-2: 0 4px 12px -2px rgba(22, 32, 46, 0.09), 0 2px 6px -2px rgba(22, 32, 46, 0.06);
+  --shadow-3: 0 24px 48px -16px rgba(22, 32, 46, 0.2), 0 8px 20px -8px rgba(22, 32, 46, 0.12);
 }
 
 * {
@@ -71,11 +71,11 @@ body {
   .btn-primary {
     background: var(--accent);
     color: var(--on-accent);
-    box-shadow: 0 6px 16px -6px rgba(249, 84, 42, 0.5);
+    box-shadow: 0 6px 16px -6px rgba(31, 143, 242, 0.5);
     @apply font-semibold hover:brightness-[1.05] active:brightness-95;
   }
   .btn-primary:hover {
-    box-shadow: 0 8px 22px -6px rgba(249, 84, 42, 0.55);
+    box-shadow: 0 8px 22px -6px rgba(31, 143, 242, 0.55);
   }
   .btn-ghost {
     @apply border border-[var(--line-2)] bg-[var(--surface)] text-ink-100 hover:border-ink-500 hover:bg-[var(--surface-2)];
@@ -106,7 +106,7 @@ body {
   }
 
   .link {
-    @apply font-medium text-[var(--accent-600)] underline decoration-[#f9542a80] underline-offset-[3px] transition-colors hover:decoration-[var(--accent)];
+    @apply font-medium text-[var(--accent-600)] underline decoration-[#1f8ff280] underline-offset-[3px] transition-colors hover:decoration-[var(--accent)];
   }
 }
 
@@ -137,11 +137,11 @@ body {
   opacity: 0.7;
 }
 
-/* warm wash used behind hero / carousel */
+/* cool brand wash used behind hero / carousel */
 .warm-wash {
   background:
-    radial-gradient(60% 60% at 78% 8%, rgba(249, 84, 42, 0.1), transparent 60%),
-    radial-gradient(50% 50% at 10% 0%, rgba(255, 178, 62, 0.12), transparent 55%);
+    radial-gradient(60% 60% at 78% 8%, rgba(31, 143, 242, 0.12), transparent 60%),
+    radial-gradient(50% 50% at 10% 0%, rgba(31, 143, 242, 0.07), transparent 55%);
 }
 
 .marquee-mask {

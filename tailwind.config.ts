@@ -11,25 +11,25 @@ export default {
         receipt: ["var(--font-receipt)"],
       },
       colors: {
-        /* Warm neutral ramp, dark → light. Low numbers = ink (text),
-           high numbers = paper. Tuned for a light background. */
+        /* Cool navy → light ramp. Low numbers = ink (text), high = paper.
+           Tuned to sit under the navy/blue brand logo. */
         ink: {
-          50: "#1b1813",
-          100: "#26221b",
-          200: "#3a352c",
-          300: "#4f493e",
-          400: "#6d665a",
-          500: "#8b8477",
-          600: "#a9a294",
-          700: "#c6bfb1",
-          800: "#ded7c9",
-          900: "#eee8dc",
-          950: "#f7f3ea",
+          50: "#16202e",
+          100: "#1f2b3b",
+          200: "#334153",
+          300: "#46515f",
+          400: "#606b7a",
+          500: "#7c8695",
+          600: "#9aa4b2",
+          700: "#bcc4cf",
+          800: "#d6dce5",
+          900: "#e9edf3",
+          950: "#f4f7fb",
         },
         accent: {
-          400: "#ff7a4d",
-          500: "#f9542a",
-          600: "#e0400f",
+          400: "#52a8f6",
+          500: "#1f8ff2",
+          600: "#1670c4",
         },
       },
       keyframes: {

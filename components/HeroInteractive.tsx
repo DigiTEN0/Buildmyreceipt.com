@@ -46,7 +46,7 @@ export default function HeroInteractive() {
               aria-pressed={on}
               className={`rounded-full border px-3 py-1.5 text-[12.5px] font-medium transition-all duration-150 ${
                 on
-                  ? "border-transparent text-[var(--on-accent)] shadow-[0_6px_16px_-6px_rgba(249,84,42,.5)]"
+                  ? "border-transparent text-[var(--on-accent)] shadow-[0_6px_16px_-6px_rgba(31,143,242,.5)]"
                   : "border-[var(--line-2)] bg-[var(--surface)] text-ink-300 hover:border-ink-500"
               }`}
               style={on ? { background: "var(--accent)" } : undefined}
