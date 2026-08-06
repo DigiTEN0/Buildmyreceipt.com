@@ -118,7 +118,7 @@ export default async function TemplatePage({
             {tpl.fields.map((f) => (
               <li
                 key={f}
-                className="rounded-full border border-[var(--line-2)] bg-[var(--panel)] px-3 py-1 text-[12px] text-ink-300"
+                className="rounded-full border border-[var(--line-2)] bg-[var(--surface)] px-3 py-1 text-[12px] text-ink-300"
               >
                 {f}
               </li>
@@ -154,7 +154,7 @@ export default async function TemplatePage({
               <div className="mt-4 divide-y divide-[var(--line)] border-y border-[var(--line)]">
                 {tpl.faqs.map((f) => (
                   <details key={f.q} className="group">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-white">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-ink-50">
                       {f.q}
                       <span
                         className="shrink-0 font-mono text-ink-500 transition-transform group-open:rotate-45"
@@ -182,7 +182,7 @@ export default async function TemplatePage({
                       href={`/templates/${r.slug}`}
                       className="group flex items-baseline justify-between gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-[var(--bg-2)]"
                     >
-                      <span className="text-[13.5px] text-ink-200 transition-colors group-hover:text-[var(--acid)]">
+                      <span className="text-[13.5px] text-ink-200 transition-colors group-hover:text-[var(--accent)]">
                         {r.name}
                       </span>
                       <span

@@ -87,14 +87,14 @@ export default function Pricing() {
               className="panel relative flex flex-col p-7"
               style={
                 t.hero
-                  ? { borderColor: "var(--acid)", background: "var(--bg-2)" }
+                  ? { borderColor: "var(--accent)", background: "var(--bg-2)" }
                   : undefined
               }
             >
               {t.hero && (
                 <span
                   className="absolute -top-2.5 left-7 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em]"
-                  style={{ background: "var(--acid)", color: "#0c0e13" }}
+                  style={{ background: "var(--accent)", color: "#fff" }}
                 >
                   Most useful
                 </span>
@@ -117,7 +117,7 @@ export default function Pricing() {
                   <li key={f} className="flex items-start gap-2.5 text-[13.5px] text-ink-300">
                     <span
                       className="mt-[7px] block h-1 w-1 shrink-0 rounded-full"
-                      style={{ background: "var(--acid)" }}
+                      style={{ background: "var(--accent)" }}
                       aria-hidden="true"
                     />
                     {f}
@@ -176,7 +176,7 @@ export default function Pricing() {
               },
             ].map((f) => (
               <details key={f.q} className="group">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-white">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-ink-50">
                   {f.q}
                   <span
                     className="shrink-0 font-mono text-ink-500 transition-transform group-open:rotate-45"

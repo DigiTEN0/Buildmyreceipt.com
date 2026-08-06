@@ -42,19 +42,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0c0e13",
+  themeColor: "#f4f1ea",
   width: "device-width",
   initialScale: 1,
 };
 
 function Header() {
   return (
-    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(12,14,19,.82)] backdrop-blur-xl">
+    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(244,241,234,.82)] backdrop-blur-xl">
       <div className="container-x flex h-14 items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label={SITE.name}>
           <span
             className="grid h-7 w-7 place-items-center rounded-md text-[13px] font-bold"
-            style={{ background: "var(--acid)", color: "#0c0e13" }}
+            style={{ background: "var(--accent)", color: "#fff" }}
             aria-hidden="true"
           >
             ▤
@@ -69,7 +69,7 @@ function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className="rounded-lg px-3 py-1.5 text-sm text-ink-300 transition-colors hover:bg-[var(--panel)] hover:text-ink-50"
+              className="rounded-lg px-3 py-1.5 text-sm text-ink-300 transition-colors hover:bg-[var(--surface)] hover:text-ink-50"
             >
               {n.label}
             </Link>
@@ -131,7 +131,7 @@ function Footer() {
             <div className="flex items-center gap-2.5">
               <span
                 className="grid h-7 w-7 place-items-center rounded-md text-[13px] font-bold"
-                style={{ background: "var(--acid)", color: "#0c0e13" }}
+                style={{ background: "var(--accent)", color: "#fff" }}
                 aria-hidden="true"
               >
                 ▤

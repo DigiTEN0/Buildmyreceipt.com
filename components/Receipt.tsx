@@ -88,7 +88,7 @@ const Receipt = forwardRef<HTMLDivElement, Props>(function Receipt(
   return (
     <div
       ref={ref}
-      className="relative mx-auto bg-white text-black shadow-[0_18px_50px_-12px_rgba(0,0,0,.55)]"
+      className="relative mx-auto bg-white text-black shadow-[0_24px_60px_-18px_rgba(40,30,15,.28),0_6px_16px_-8px_rgba(40,30,15,.14)]"
       style={{
         width: paper.px,
         fontFamily: "var(--font-receipt)",
@@ -315,16 +315,33 @@ const Receipt = forwardRef<HTMLDivElement, Props>(function Receipt(
           data-watermark=""
         >
           <div
-            className="absolute left-1/2 top-1/2 whitespace-nowrap"
+            className="absolute left-1/2 top-1/2"
             style={{
-              transform: "translate(-50%,-50%) rotate(-38deg)",
-              fontSize: paper.px * 0.13,
-              fontWeight: 800,
-              color: "rgba(15,23,42,.13)",
-              letterSpacing: "0.08em",
+              width: "180%",
+              height: "180%",
+              transform: "translate(-50%,-50%) rotate(-32deg)",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: `${paper.px * 0.06}px ${paper.px * 0.05}px`,
+              alignContent: "center",
+              justifyContent: "center",
             }}
           >
-            BUILDMYRECEIPT
+            {Array.from({ length: 60 }).map((_, i) => (
+              <span
+                key={i}
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: paper.px * 0.052,
+                  fontWeight: 700,
+                  color: "rgba(30,26,19,.085)",
+                  letterSpacing: "0.04em",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                BuildMyReceipt
+              </span>
+            ))}
           </div>
         </div>
       )}

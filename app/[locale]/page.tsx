@@ -142,7 +142,7 @@ export default async function LocaleHub({
               href={`/${l.path}/${t.slug}`}
               className="panel group flex flex-col p-5 transition-all duration-150 hover:border-ink-600 hover:bg-[var(--bg-2)]"
             >
-              <h3 className="font-display text-[15.5px] font-semibold tracking-[-0.012em] transition-colors group-hover:text-[var(--acid)]">
+              <h3 className="font-display text-[15.5px] font-semibold tracking-[-0.012em] transition-colors group-hover:text-[var(--accent)]">
                 {t.name}
               </h3>
               <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-400">{t.blurb}</p>
@@ -184,9 +184,9 @@ export default async function LocaleHub({
                 <li key={o.path}>
                   <Link
                     href={`/${o.path}`}
-                    className="group flex items-baseline justify-between gap-3 rounded-lg border border-[var(--line)] px-4 py-3 transition-colors hover:border-ink-600 hover:bg-[var(--panel)]"
+                    className="group flex items-baseline justify-between gap-3 rounded-lg border border-[var(--line)] px-4 py-3 transition-colors hover:border-ink-600 hover:bg-[var(--surface)]"
                   >
-                    <span className="text-[14px] text-ink-200 transition-colors group-hover:text-[var(--acid)]">
+                    <span className="text-[14px] text-ink-200 transition-colors group-hover:text-[var(--accent)]">
                       {o.country}
                     </span>
                     <span className="font-mono text-[11px] text-ink-500">

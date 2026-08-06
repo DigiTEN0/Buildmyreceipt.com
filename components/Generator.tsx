@@ -109,7 +109,7 @@ function Toggle({
       <span className="text-[13px] text-ink-200">{label}</span>
       <span
         className="relative h-[18px] w-8 shrink-0 rounded-full transition-colors"
-        style={{ background: checked ? "var(--acid)" : "var(--line-2)" }}
+        style={{ background: checked ? "var(--accent)" : "var(--line-2)" }}
         aria-hidden="true"
       >
         <span
@@ -141,6 +141,8 @@ export default function Generator({
   });
   const [busy, setBusy] = useState<null | "png" | "pdf">(null);
   const [toast, setToast] = useState<string | null>(null);
+  // Free downloads carry a watermark; removing it is the Pro upgrade.
+  const [watermark, setWatermark] = useState(true);
   const paperRef = useRef<HTMLDivElement>(null);
 
   const totals = useMemo(() => computeTotals(data), [data]);
@@ -451,7 +453,7 @@ export default function Generator({
                       aria-label="Move up"
                       disabled={idx === 0}
                       onClick={() => moveItem(item.id, -1)}
-                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--panel)] hover:text-ink-100 disabled:opacity-25"
+                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--surface)] hover:text-ink-100 disabled:opacity-25"
                     >
                       ↑
                     </button>
@@ -460,7 +462,7 @@ export default function Generator({
                       aria-label="Move down"
                       disabled={idx === data.items.length - 1}
                       onClick={() => moveItem(item.id, 1)}
-                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--panel)] hover:text-ink-100 disabled:opacity-25"
+                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--surface)] hover:text-ink-100 disabled:opacity-25"
                     >
                       ↓
                     </button>
@@ -468,7 +470,7 @@ export default function Generator({
                       type="button"
                       aria-label={`Remove item ${idx + 1}`}
                       onClick={() => removeItem(item.id)}
-                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--panel)] hover:text-red-400"
+                      className="rounded px-1.5 py-0.5 font-mono text-[11px] text-ink-500 hover:bg-[var(--surface)] hover:text-red-400"
                     >
                       ✕
                     </button>
@@ -722,7 +724,7 @@ export default function Generator({
             </span>
           </div>
 
-          <div className="flex items-center gap-1 rounded-lg border border-[var(--line-2)] bg-[var(--panel)] p-1">
+          <div className="flex items-center gap-1 rounded-lg border border-[var(--line-2)] bg-[var(--surface)] p-1">
             {PAPERS.map((p) => (
               <button
                 key={p}
@@ -732,14 +734,41 @@ export default function Generator({
                 className="rounded px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-colors"
                 style={
                   data.paper === p
-                    ? { background: "var(--acid)", color: "#0c0e13", fontWeight: 700 }
-                    : { color: "var(--fg-3)" }
+                    ? { background: "var(--accent)", color: "#fff", fontWeight: 700 }
+                    : { color: "var(--ink-3)" }
                 }
               >
                 {p === "a4" ? "A4" : p.replace("mm", "")}
               </button>
             ))}
           </div>
+
+          {watermark ? (
+            <button
+              type="button"
+              onClick={() => {
+                setWatermark(false);
+                setToast("Watermark removed — a Pro feature (free while in beta)");
+              }}
+              className="btn inline-flex items-center gap-1.5 border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent-600)] hover:brightness-[.98]"
+            >
+              Remove watermark
+              <span
+                className="rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-[var(--on-accent)]"
+                style={{ background: "var(--accent)" }}
+              >
+                Pro
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setWatermark(true)}
+              className="btn btn-quiet !px-2 text-[12.5px]"
+            >
+              Add watermark
+            </button>
+          )}
 
           <button
             type="button"
@@ -768,7 +797,7 @@ export default function Generator({
 
         <div className="flex justify-center overflow-x-auto rounded-xl border border-[var(--line)] bg-[var(--bg-2)] p-6 sm:p-10">
           <div className="animate-slide-up">
-            <Receipt ref={paperRef} data={data} />
+            <Receipt ref={paperRef} data={data} watermark={watermark} />
           </div>
         </div>
 
@@ -786,7 +815,7 @@ export default function Generator({
       {toast && (
         <div
           role="status"
-          className="no-print fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-lg border border-[var(--line-2)] bg-[var(--panel)] px-4 py-2.5 text-[13px] shadow-2xl"
+          className="no-print fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-lg border border-[var(--line-2)] bg-[var(--surface)] px-4 py-2.5 text-[13px] shadow-2xl"
         >
           {toast}
         </div>

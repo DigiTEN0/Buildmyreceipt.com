@@ -155,7 +155,7 @@ export default async function LocaleTemplatePage({
               <div className="mt-4 divide-y divide-[var(--line)] border-y border-[var(--line)]">
                 {t.faqs.map((f) => (
                   <details key={f.q} className="group">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-white">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-ink-50">
                       {f.q}
                       <span
                         className="shrink-0 font-mono text-ink-500 transition-transform group-open:rotate-45"
@@ -183,7 +183,7 @@ export default async function LocaleTemplatePage({
                       href={`/${l.path}/${s.slug}`}
                       className="group flex items-baseline justify-between gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-[var(--bg-2)]"
                     >
-                      <span className="text-[13.5px] text-ink-200 transition-colors group-hover:text-[var(--acid)]">
+                      <span className="text-[13.5px] text-ink-200 transition-colors group-hover:text-[var(--accent)]">
                         {s.name}
                       </span>
                       <span className="font-mono text-[11px] text-ink-600" aria-hidden="true">

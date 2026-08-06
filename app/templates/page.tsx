@@ -50,7 +50,7 @@ export default function TemplatesIndex() {
             <a
               key={c}
               href={`#${c.toLowerCase().replace(/[^a-z]+/g, "-")}`}
-              className="rounded-full border border-[var(--line-2)] bg-[var(--panel)] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-300 transition-colors hover:border-[var(--acid)] hover:text-[var(--acid)]"
+              className="rounded-full border border-[var(--line-2)] bg-[var(--surface)] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-300 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               {c}
             </a>
@@ -77,7 +77,7 @@ export default function TemplatesIndex() {
                     href={`/templates/${t.slug}`}
                     className="panel group flex flex-col p-5 transition-all duration-150 hover:border-ink-600 hover:bg-[var(--bg-2)]"
                   >
-                    <h3 className="font-display text-[15.5px] font-semibold tracking-[-0.012em] transition-colors group-hover:text-[var(--acid)]">
+                    <h3 className="font-display text-[15.5px] font-semibold tracking-[-0.012em] transition-colors group-hover:text-[var(--accent)]">
                       {t.name}
                     </h3>
                     <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-400">

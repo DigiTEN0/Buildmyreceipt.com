@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { TEMPLATES } from "@/lib/templates";
 import { SITE } from "@/lib/site";
-import HeroReceipt from "@/components/HeroReceipt";
+import HeroInteractive from "@/components/HeroInteractive";
+import TemplateMarquee from "@/components/TemplateMarquee";
 
 export const metadata: Metadata = {
   title: "Free Receipt Generator — Create Business Receipts Online | BuildMyReceipt",
@@ -106,60 +107,89 @@ export default function Home() {
       />
 
       {/* ══════ hero ══════ */}
-      <section className="relative overflow-hidden border-b border-[var(--line)]">
+      <section className="warm-wash relative overflow-hidden border-b border-[var(--line)]">
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="container-x relative grid gap-12 py-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-24">
+        <div className="container-x relative grid gap-14 py-14 lg:grid-cols-[1fr_1.02fr] lg:items-center lg:py-20">
           <div>
-            <p className="eyebrow mb-5 flex items-center gap-2">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--line-2)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400 shadow-[var(--shadow-1)]">
               <span
                 className="inline-block h-1.5 w-1.5 rounded-full"
-                style={{ background: "var(--acid)" }}
+                style={{ background: "var(--accent)" }}
                 aria-hidden="true"
               />
-              Free · No signup · Runs in your browser
+              Free · No signup · 60 seconds
             </p>
 
-            <h1 className="max-w-[15ch] text-balance font-display text-[clamp(2.3rem,6vw,4rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-              Receipts that look like they came off a till.
+            <h1 className="text-balance font-display text-[clamp(2.4rem,6vw,4.1rem)] font-semibold leading-[1.0] tracking-[-0.038em]">
+              The free receipt maker that{" "}
+              <span className="relative whitespace-nowrap text-[var(--accent-600)]">
+                looks real
+                <svg
+                  className="absolute -bottom-1 left-0 h-2.5 w-full text-[var(--accent)]"
+                  viewBox="0 0 200 12"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 8.5C40 3.5 90 2.5 198 5.5"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    opacity="0.6"
+                  />
+                </svg>
+              </span>
+              .
             </h1>
 
-            <p className="mt-6 max-w-[54ch] text-[17px] leading-relaxed text-ink-300">
-              A proper receipt generator for business records. Real thermal widths, real
-              monospace print, maths that adds up. Build one in about thirty seconds and
-              download it as a PNG or PDF.
+            <p className="mt-6 max-w-[52ch] text-[17px] leading-relaxed text-ink-300">
+              Pick a template, edit your items and details, and download a crisp,
+              professional receipt in under a minute. Real thermal print, automatic totals,
+              your own logo. Export as PNG, PDF or JPG.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href="/generator" className="btn btn-primary !px-6 !py-3 !text-[15px]">
-                Create a receipt — free
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/generator" className="btn btn-primary !px-6 !py-3.5 !text-[15px]">
+                Generate a receipt →
               </Link>
-              <Link href="/templates" className="btn btn-ghost !px-5 !py-3 !text-[15px]">
+              <Link href="/templates" className="btn btn-ghost !px-5 !py-3.5 !text-[15px]">
                 Browse {TEMPLATES.length} templates
               </Link>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-[var(--line)] pt-7">
-              {[
-                ["4", "paper sizes"],
-                ["14", "currencies"],
-                ["0", "signup steps"],
-              ].map(([n, l]) => (
-                <div key={l}>
-                  <dt className="font-display text-3xl font-semibold tabular-nums tracking-[-0.03em]">
-                    {n}
-                  </dt>
-                  <dd className="mt-0.5 font-mono text-[10.5px] uppercase tracking-[0.13em] text-ink-500">
-                    {l}
-                  </dd>
-                </div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-ink-400">
+              {["Ready in 60 seconds", "PNG", "PDF", "JPG", "No signup"].map((x) => (
+                <span key={x} className="inline-flex items-center gap-1.5">
+                  <span className="text-[var(--accent)]" aria-hidden="true">
+                    ✓
+                  </span>
+                  {x}
+                </span>
               ))}
-            </dl>
+            </div>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end">
-            <HeroReceipt />
+          <div className="relative">
+            <HeroInteractive />
           </div>
         </div>
+      </section>
+
+      {/* ══════ auto-sliding template carousel ══════ */}
+      <section className="overflow-hidden border-b border-[var(--line)] bg-[var(--surface-2)] py-14">
+        <div className="container-x mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <p className="eyebrow mb-3">The library</p>
+            <h2 className="font-display text-[clamp(1.7rem,3.6vw,2.4rem)] font-semibold leading-[1.1] tracking-[-0.028em]">
+              {TEMPLATES.length} ready-made templates, one click away
+            </h2>
+          </div>
+          <Link href="/templates" className="btn btn-ghost">
+            See all templates →
+          </Link>
+        </div>
+        <TemplateMarquee />
       </section>
 
       {/* ══════ features ══════ */}
@@ -173,7 +203,7 @@ export default function Home() {
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f) => (
-            <div key={f.t} className="bg-[var(--panel)] p-6">
+            <div key={f.t} className="bg-[var(--surface)] p-6">
               <h3 className="font-display text-[15px] font-semibold tracking-[-0.01em]">
                 {f.t}
               </h3>
@@ -207,7 +237,7 @@ export default function Home() {
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-500">
                 {t.category}
               </p>
-              <h3 className="mt-2.5 font-display text-[15px] font-semibold tracking-[-0.01em] transition-colors group-hover:text-[var(--acid)]">
+              <h3 className="mt-2.5 font-display text-[15px] font-semibold tracking-[-0.01em] transition-colors group-hover:text-[var(--accent)]">
                 {t.name}
               </h3>
               <p className="mt-1.5 text-[13px] leading-relaxed text-ink-400">{t.blurb}</p>
@@ -239,7 +269,7 @@ export default function Home() {
                 d: "Pick your paper width, then export a 3× PNG or a PDF sized to match. Print it or email it.",
               },
             ].map((s, i) => (
-              <li key={s.t} className="border-t-2 border-[var(--acid)] pt-5">
+              <li key={s.t} className="border-t-2 border-[var(--accent)] pt-5">
                 <span className="font-mono text-[11px] tabular-nums text-ink-500">
                   0{i + 1}
                 </span>
@@ -266,7 +296,7 @@ export default function Home() {
           <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {FAQS.map((f) => (
               <details key={f.q} className="group">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-white">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-ink-100 transition-colors hover:text-ink-50">
                   {f.q}
                   <span
                     className="shrink-0 font-mono text-ink-500 transition-transform group-open:rotate-45"
@@ -284,12 +314,12 @@ export default function Home() {
 
       {/* ══════ cta ══════ */}
       <section className="container-x pb-8">
-        <div className="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--panel)] px-8 py-14 text-center">
+        <div className="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-8 py-14 text-center">
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-px"
             style={{
               background:
-                "linear-gradient(90deg,transparent,var(--acid),transparent)",
+                "linear-gradient(90deg,transparent,var(--accent),transparent)",
             }}
             aria-hidden="true"
           />
