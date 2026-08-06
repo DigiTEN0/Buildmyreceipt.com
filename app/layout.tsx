@@ -65,26 +65,62 @@ export const viewport = {
   initialScale: 1,
 };
 
+export function LogoMark({ size = 36 }: { size?: number }) {
+  return (
+    <span
+      className="relative inline-grid shrink-0 place-items-center"
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size * 0.3,
+        background: "var(--grad-warm)",
+        boxShadow:
+          "0 5px 14px -4px rgba(246,81,29,.55), inset 0 1px 0 rgba(255,255,255,.32)",
+      }}
+      aria-hidden="true"
+    >
+      <svg width={size * 0.52} viewBox="0 0 20 22" fill="none">
+        <path
+          d="M3 1.6H17V19.2L14.67 20.8 12.33 19.2 10 20.8 7.67 19.2 5.33 20.8 3 19.2Z"
+          fill="#fff"
+        />
+        <rect x="6" y="5" width="8" height="2.3" rx="1.15" fill="#f6511d" />
+        <rect x="6" y="9.4" width="8" height="1.5" rx=".75" fill="#ffb59e" />
+        <rect x="6" y="12.4" width="5" height="1.5" rx=".75" fill="#ffb59e" />
+      </svg>
+      {/* verified badge */}
+      <span
+        className="absolute grid place-items-center rounded-full bg-white"
+        style={{
+          width: size * 0.42,
+          height: size * 0.42,
+          right: -size * 0.1,
+          bottom: -size * 0.1,
+          boxShadow: "0 2px 5px rgba(60,30,10,.25)",
+        }}
+      >
+        <svg
+          width={size * 0.24}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--accent-600)"
+          strokeWidth="3.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </span>
+    </span>
+  );
+}
+
 function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`flex items-center gap-2.5 ${className}`}>
-      <span
-        className="grid h-8 w-8 place-items-center rounded-[10px] shadow-[var(--shadow-1)]"
-        style={{ background: "var(--grad-warm)" }}
-        aria-hidden="true"
-      >
-        <svg width="17" height="17" viewBox="0 0 32 32" fill="none">
-          <path
-            d="M9 5.5h14v21l-2.33-1.6L18.33 26.5 16 24.9l-2.33 1.6L11.33 24.9 9 26.5z"
-            fill="#fff"
-          />
-          <rect x="12" y="10" width="8" height="1.9" rx=".95" fill="#f6511d" />
-          <rect x="12" y="14" width="8" height="1.9" rx=".95" fill="#f6511d" />
-          <rect x="12" y="18" width="5" height="1.9" rx=".95" fill="#f6511d" />
-        </svg>
-      </span>
-      <span className="font-display text-[16px] font-bold tracking-[-0.02em] text-ink-50">
-        BuildMyReceipt
+      <LogoMark size={34} />
+      <span className="font-display text-[17px] font-extrabold leading-none tracking-[-0.03em] text-ink-50">
+        BuildMy<span className="gradient-text">Receipt</span>
       </span>
     </span>
   );

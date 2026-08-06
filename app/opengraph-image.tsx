@@ -21,26 +21,49 @@ export default function OGImage() {
         }}
       >
         {/* brand row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
           <div
             style={{
-              width: 68,
-              height: 68,
-              borderRadius: 18,
+              position: "relative",
+              width: 72,
+              height: 72,
+              borderRadius: 20,
               background: "linear-gradient(135deg,#ff7a3d,#f6511d 60%,#e23c0b)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <svg width="38" height="38" viewBox="0 0 32 32">
+            <svg width="40" height="44" viewBox="0 0 20 22">
               <path
-                d="M9 5.5h14v21l-2.33-1.6L18.33 26.5 16 24.9l-2.33 1.6L11.33 24.9 9 26.5z"
+                d="M3 1.6H17V19.2L14.67 20.8 12.33 19.2 10 20.8 7.67 19.2 5.33 20.8 3 19.2Z"
                 fill="#fff"
               />
+              <rect x="6" y="5" width="8" height="2.3" rx="1.15" fill="#f6511d" />
+              <rect x="6" y="9.4" width="8" height="1.5" rx=".75" fill="#ffb59e" />
+              <rect x="6" y="12.4" width="5" height="1.5" rx=".75" fill="#ffb59e" />
             </svg>
+            <div
+              style={{
+                position: "absolute",
+                right: -7,
+                bottom: -7,
+                width: 32,
+                height: 32,
+                borderRadius: 999,
+                background: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 6px rgba(0,0,0,.22)",
+              }}
+            >
+              <svg width="17" viewBox="0 0 24 24" fill="none" stroke="#dc3f0c" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </div>
           </div>
-          <div style={{ fontSize: 34, fontWeight: 800, color: "#141210" }}>BuildMyReceipt</div>
+          <div style={{ fontSize: 36, fontWeight: 800, color: "#141210" }}>BuildMyReceipt</div>
         </div>
 
         {/* headline */}
