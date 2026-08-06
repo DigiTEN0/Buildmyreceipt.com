@@ -51,9 +51,9 @@ export const viewport = {
 function Header() {
   return (
     <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(242,245,250,.82)] backdrop-blur-xl">
-      <div className="container-x flex h-14 items-center justify-between gap-6">
+      <div className="container-x flex h-[68px] items-center justify-between gap-6">
         <Link href="/" className="shrink-0" aria-label={SITE.name}>
-          <Logo size={36} />
+          <Logo size={46} />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">

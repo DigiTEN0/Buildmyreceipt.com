@@ -2639,6 +2639,278 @@ export const TEMPLATES: TemplateDef[] = [
       },
     },
   },
+
+  {
+    slug: "rideshare-receipt",
+    name: "Rideshare Receipt",
+    h1: "Rideshare Receipt Generator",
+    category: "Transport",
+    blurb: "App ride-hail format — itemised fare, surcharges, booking fee, payment and trip stops.",
+    intent:
+      "Create an app-based rideshare receipt in the emailed ride-hail format — greeting, total, itemised fare with surcharges and booking fee, payment line, and pickup/dropoff stops with times.",
+    sections: [
+      {
+        heading: "The emailed ride-hail layout",
+        body: [
+          "App-based rideshare receipts are emailed confirmations, not printed slips. They open with a short greeting and the total, then break the fare into its parts: the trip fare, any regulatory charges or levies, a temporary surcharge, and a booking fee.",
+          "Below that sits the payment line (card and time), and a trip summary listing the distance and duration with the timed pickup and dropoff stops. This template uses the full-page layout because that is how these receipts are read and filed.",
+        ],
+      },
+      {
+        heading: "Fares, levies and fees",
+        body: [
+          "Enter each fare component as its own line — trip fare, then any government or regulatory levy, surcharge and booking fee. Keeping them separate matches the format and is what an expense reviewer checks.",
+          "Regulatory charges vary by city and region, so name them as they apply where the ride took place rather than assuming a fixed set.",
+        ],
+      },
+      {
+        heading: "Trip stops and driver",
+        body: [
+          "List the pickup and dropoff as timed stops in the footer — the time, then the address — because the two stops establish the journey for a business claim. Add the driver's first name and the service class if you want the summary to match.",
+          "This reproduces the general structure of ride-hail receipts, not any specific operator's branding. Enter your own trip details.",
+        ],
+      },
+    ],
+    fields: [
+      "Operator or service name",
+      "Rider greeting and total",
+      "Trip fare, levies, surcharge, booking fee",
+      "Payment card and time",
+      "Distance, duration and timed stops",
+    ],
+    faqs: [
+      {
+        q: "Should the fees be itemised?",
+        a: "Yes — trip fare, levies, surcharge and booking fee each get their own line. That is the whole point of a ride-hail receipt.",
+      },
+      {
+        q: "Where do pickup and dropoff go?",
+        a: "As timed stops in the footer: the time, then the address, for each end of the trip.",
+      },
+      {
+        q: "Is this A4 or thermal?",
+        a: "A4 or Letter — rideshare receipts are emailed documents.",
+      },
+    ],
+    related: ["taxi-receipt", "parking-receipt", "gas-station-receipt", "food-delivery-receipt"],
+    seed: {
+      style: "simple",
+      paper: "a4",
+      business: {
+        name: "CityLink Rides",
+        address: "Ride Receipt",
+        cityLine: "",
+        phone: "",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      currency: "AUD",
+      taxRate: 0,
+      taxLabel: "Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "",
+        transactionId: "",
+        register: "",
+        storeNumber: "",
+      },
+      items: [
+        { id: "1", qty: 1, name: "Trip fare", price: 20.84 },
+        { id: "2", qty: 1, name: "CTP charge", price: 0.58 },
+        { id: "3", qty: 1, name: "Temporary fuel surcharge", price: 0.17 },
+        { id: "4", qty: 1, name: "Passenger service levy", price: 1.32 },
+        { id: "5", qty: 1, name: "Booking fee", price: 0.85 },
+      ],
+      payment: { method: "Visa", last4: "0577", approvalCode: "", changeDue: 0 },
+      footer: {
+        headline: "Here's your receipt for your ride",
+        lines: [
+          "Comfort · 5.76 km · 16 min",
+          "14:17  71–73 Wyndham St, Alexandria NSW",
+          "14:33  T3 Domestic Terminal, Sydney Airport",
+          "You rode with Alex",
+        ],
+        showBarcode: false,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "home-improvement-receipt",
+    name: "Home Improvement Receipt",
+    h1: "Home Improvement Store Receipt Generator",
+    category: "Retail",
+    blurb: "Hardware warehouse format — SKU lines, department codes, returns policy and barcode.",
+    intent:
+      "Create a home improvement store receipt in the hardware-warehouse format — SKU and department lines, store and register numbers, tax, tender and a returns-policy footer.",
+    sections: [
+      {
+        heading: "Hardware warehouse conventions",
+        body: [
+          "Home improvement receipts lead each line with a long SKU and a terse uppercase description, grouped loosely by department. They carry store and register numbers, a cashier, and a transaction number used for returns.",
+          "The footer almost always prints the returns window and conditions, because building materials and special orders often have different return rules from stock items.",
+        ],
+      },
+      {
+        heading: "SKUs and quantities",
+        body: [
+          "Put the SKU before the description — the format is optimised for a narrow column. Lumber and bulk items are sold by length or quantity, so quantities above one are common and the per-unit price prints beneath the line.",
+          "Special-order and cut items are conventionally flagged in the description, since they are frequently non-returnable.",
+        ],
+      },
+    ],
+    fields: [
+      "Store name, address and store number",
+      "Cashier, register and transaction number",
+      "SKU, department and description",
+      "Quantities, subtotal and tax",
+      "Returns policy and barcode",
+    ],
+    faqs: [
+      {
+        q: "Should I include SKUs?",
+        a: "Yes — hardware receipts lead each line with the SKU before the description.",
+      },
+      {
+        q: "How do I show lumber sold by length?",
+        a: "Put the count in the quantity field and the per-piece price in the price field.",
+      },
+      {
+        q: "Where does the returns policy go?",
+        a: "The footer — home improvement stores print the returns window and conditions on the receipt.",
+      },
+    ],
+    related: ["superstore-receipt", "retail-receipt", "electronics-receipt", "itemized-receipt"],
+    seed: {
+      style: "retail",
+      paper: "80mm",
+      business: {
+        name: "BuildRight Home Center",
+        address: "3200 Contractor Way",
+        cityLine: "Charlotte, NC 28216",
+        phone: "(704) 555-0163",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 7.25,
+      taxLabel: "Sales Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "CASHIER 18",
+        transactionId: "",
+        register: "REG 04",
+        storeNumber: "STORE 1147",
+      },
+      items: [
+        { id: "1", qty: 4, name: "4471882 2X4X8 STUD", price: 4.28 },
+        { id: "2", qty: 1, name: "2207145 EXT PAINT GAL", price: 34.98 },
+        { id: "3", qty: 2, name: "9910042 CAULK SILICONE", price: 6.47 },
+        { id: "4", qty: 1, name: "8823017 DRILL BIT SET", price: 19.98 },
+        { id: "5", qty: 1, name: "3140228 WORK GLOVES L", price: 8.97 },
+      ],
+      footer: {
+        headline: "THANK YOU FOR SHOPPING",
+        lines: ["Returns within 90 days with receipt", "Special orders and cut items final sale"],
+        showBarcode: true,
+        showSurvey: false,
+        showSavings: false,
+        savings: 0,
+      },
+    },
+  },
+
+  {
+    slug: "department-store-receipt",
+    name: "Department Store Receipt",
+    h1: "Department Store Receipt Generator",
+    category: "Retail",
+    blurb: "Department store format — department numbers, associate ID, loyalty savings and returns.",
+    intent:
+      "Create a department store receipt in the multi-department format — department numbers, associate ID, itemised goods, loyalty savings and a returns-policy footer.",
+    sections: [
+      {
+        heading: "Multi-department layout",
+        body: [
+          "Department store receipts organise the basket by department — apparel, home, beauty — with a department number beside each item, an associate or salesperson ID, and a register and store number.",
+          "They frequently show loyalty or promotional savings as their own lines and a running savings total, then close with a returns window and any exclusions.",
+        ],
+      },
+      {
+        heading: "Departments, associates and savings",
+        body: [
+          "Lead the item line with the department number, then the description. Where a loyalty discount or promotion applied, show it as a separate reduction so the original price stays visible for returns.",
+          "The associate ID belongs in the cashier field; the store and register numbers in their meta fields.",
+        ],
+      },
+    ],
+    fields: [
+      "Store name, address and store number",
+      "Associate ID and register",
+      "Department numbers and descriptions",
+      "Loyalty savings and running total",
+      "Returns policy",
+    ],
+    faqs: [
+      {
+        q: "How do I show departments?",
+        a: "Lead each item line with its department number before the description.",
+      },
+      {
+        q: "How should promotions appear?",
+        a: "As separate reduction lines, so the original price stays visible for returns.",
+      },
+      {
+        q: "Can I show a savings total?",
+        a: "Yes — enable the savings line in footer options.",
+      },
+    ],
+    related: ["clothing-receipt", "retail-receipt", "electronics-receipt", "superstore-receipt"],
+    seed: {
+      style: "retail",
+      paper: "80mm",
+      business: {
+        name: "Harrow & Vale",
+        address: "700 Market Street",
+        cityLine: "Philadelphia, PA 19106",
+        phone: "(215) 555-0139",
+        website: "",
+        taxId: "",
+        logo: null,
+      },
+      taxRate: 8.0,
+      taxLabel: "Sales Tax",
+      meta: {
+        date: "",
+        time: "",
+        cashier: "ASSOC 2247",
+        transactionId: "",
+        register: "REG 06",
+        storeNumber: "STORE 042",
+      },
+      items: [
+        { id: "1", qty: 1, name: "D28 Wool Blend Coat", price: 149.0 },
+        { id: "2", qty: 2, name: "D14 Cotton Tee", price: 24.0 },
+        { id: "3", qty: 1, name: "D51 Leather Wallet", price: 45.0 },
+        { id: "4", qty: 1, name: "D63 Eau de Parfum 50ml", price: 78.0 },
+      ],
+      discount: 32.0,
+      footer: {
+        headline: "THANK YOU",
+        lines: ["Loyalty savings applied", "Returns within 60 days with receipt"],
+        showBarcode: true,
+        showSurvey: false,
+        showSavings: true,
+        savings: 32.0,
+      },
+    },
+  },
 ];
 
 export const TEMPLATE_MAP = new Map(TEMPLATES.map((t) => [t.slug, t]));
