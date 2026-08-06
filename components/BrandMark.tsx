@@ -117,25 +117,24 @@ export default function BrandMark({
   category,
   seed,
   size = 34,
-  color,
+  color = "#111111",
 }: {
   category: string;
   seed: string;
   size?: number;
-  /** Override the generated colour (e.g. force monochrome). */
+  /** Emblem colour. Defaults to ink so receipts read like real printed logos. */
   color?: string;
 }) {
   const key = SLUG_ICON[seed] ?? CATEGORY_ICON[category] ?? "store";
-  const bg = color ?? brandColor(seed);
-  const s = Math.round(size * 0.56);
+  const s = Math.round(size * 0.62);
   return (
     <span
       aria-hidden="true"
       style={{
         width: size,
         height: size,
-        borderRadius: Math.round(size * 0.28),
-        background: bg,
+        borderRadius: Math.round(size * 0.26),
+        background: color,
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
@@ -148,7 +147,7 @@ export default function BrandMark({
         viewBox="0 0 24 24"
         fill="none"
         stroke="#fff"
-        strokeWidth="1.7"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       >

@@ -13,7 +13,6 @@ const PICKS = [
   { slug: "retail-receipt", label: "Retail" },
   { slug: "grocery-receipt", label: "Grocery" },
   { slug: "gas-station-receipt", label: "Fuel" },
-  { slug: "taxi-receipt", label: "Taxi" },
 ];
 
 export default function HeroInteractive() {
@@ -32,32 +31,22 @@ export default function HeroInteractive() {
 
   return (
     <div className="relative mx-auto w-full max-w-[440px] lg:mr-0">
-      {/* ambient glow */}
-      <div
-        className="pointer-events-none absolute -inset-8 -z-10 rounded-[48px]"
-        style={{
-          background:
-            "radial-gradient(60% 55% at 70% 25%, rgba(246,81,29,.18), transparent 70%), radial-gradient(50% 50% at 20% 80%, rgba(247,161,43,.16), transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
-
       {/* the app stage */}
-      <div className="relative rounded-[26px] border border-[var(--line)] bg-[rgba(255,255,255,.72)] p-3.5 shadow-[var(--shadow-3)] backdrop-blur-md sm:p-4">
+      <div className="relative rounded-[16px] border border-[var(--line)] bg-white p-3.5 shadow-[var(--shadow-3)] sm:p-4">
         {/* window bar */}
         <div className="mb-3.5 flex items-center gap-3 px-1">
           <div className="flex gap-1.5" aria-hidden="true">
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#ffb4a1" }} />
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#ffd7a1" }} />
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#c8e6cf" }} />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]" />
           </div>
-          <div className="flex-1 truncate rounded-md bg-[var(--bg-2)] px-2.5 py-1 text-center font-mono text-[10px] text-ink-500">
+          <div className="flex-1 truncate rounded-md bg-[var(--bg-2)] px-2.5 py-1 text-center font-mono text-[10px] text-ink-400">
             buildmyreceipt.com/generator
           </div>
         </div>
 
-        {/* format switcher */}
-        <div className="mb-3 flex flex-wrap gap-1.5">
+        {/* format switcher — nav-pill-group */}
+        <div className="mb-3 flex flex-wrap gap-1 rounded-full bg-[var(--surface-card)] p-1">
           {PICKS.map((p) => {
             const on = p.slug === active;
             return (
@@ -66,12 +55,8 @@ export default function HeroInteractive() {
                 type="button"
                 onClick={() => setActive(p.slug)}
                 aria-pressed={on}
-                className={`rounded-full px-2.5 py-1 text-[11.5px] font-semibold transition-all duration-150 ${
-                  on
-                    ? "text-white shadow-[var(--shadow-glow)]"
-                    : "bg-[var(--bg-2)] text-ink-400 hover:text-ink-100"
-                }`}
-                style={on ? { background: "var(--grad-warm)" } : undefined}
+                data-on={on}
+                className="pill-seg"
               >
                 {p.label}
               </button>
@@ -80,15 +65,7 @@ export default function HeroInteractive() {
         </div>
 
         {/* receipt viewport — height-capped so long receipts fade instead of ballooning */}
-        <div className="relative h-[366px] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-2)]">
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(70% 60% at 50% 20%, rgba(255,255,255,.9), transparent 75%)",
-            }}
-            aria-hidden="true"
-          />
+        <div className="relative h-[366px] overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--bg-2)]">
           <div className="flex justify-center pt-7">
             {data ? (
               <div
@@ -114,7 +91,7 @@ export default function HeroInteractive() {
           {/* fade the tail of long receipts */}
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-28"
-            style={{ background: "linear-gradient(180deg, transparent, var(--paper-2) 88%)" }}
+            style={{ background: "linear-gradient(180deg, transparent, var(--bg-2) 88%)" }}
             aria-hidden="true"
           />
         </div>

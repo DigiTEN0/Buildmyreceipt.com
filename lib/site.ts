@@ -9,6 +9,10 @@ export const SITE = {
   abuseEmail: "abuse@buildmyreceipt.com",
 } as const;
 
+/** Brand logo, served from the DigiTEN CDN. */
+export const LOGO_URL =
+  "https://www.digiten.nl/wp-content/uploads/2026/08/buildmyreceipt-2-scaled.png";
+
 /** Aggregate, on-page social-proof figures (marketing copy, not schema data). */
 export const STATS = {
   receipts: "250,000+",

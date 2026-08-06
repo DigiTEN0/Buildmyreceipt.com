@@ -84,42 +84,60 @@ export default function Pricing() {
           {TIERS.map((t) => (
             <div
               key={t.name}
-              className="panel relative flex flex-col p-7"
-              style={
+              className={`relative flex flex-col rounded-[12px] p-8 ${
                 t.hero
-                  ? { borderColor: "var(--accent)", background: "var(--bg-2)" }
-                  : undefined
-              }
+                  ? "bg-[var(--surface-dark)] text-white"
+                  : "border border-[var(--line)] bg-white text-ink-200 shadow-[var(--shadow-1)]"
+              }`}
             >
               {t.hero && (
-                <span
-                  className="absolute -top-2.5 left-7 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em]"
-                  style={{ background: "var(--accent)", color: "#fff" }}
-                >
+                <span className="absolute -top-2.5 left-8 rounded-full bg-[var(--accent)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] text-white">
                   Most useful
                 </span>
               )}
 
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-400">
+              <h2
+                className={`text-[12px] font-semibold uppercase tracking-[0.12em] ${
+                  t.hero ? "text-white/60" : "text-ink-400"
+                }`}
+              >
                 {t.name}
               </h2>
 
               <div className="mt-4 flex items-baseline gap-2">
-                <span className="font-display text-[38px] font-semibold tabular-nums leading-none tracking-[-0.035em]">
+                <span
+                  className={`font-display text-[38px] font-extrabold tabular-nums leading-none tracking-[-0.035em] ${
+                    t.hero ? "text-white" : "text-ink-50"
+                  }`}
+                >
                   {t.price}
                 </span>
-                <span className="text-[13px] text-ink-500">{t.cadence}</span>
+                <span className={`text-[13px] ${t.hero ? "text-white/60" : "text-ink-400"}`}>
+                  {t.cadence}
+                </span>
               </div>
-              <p className="mt-2 font-mono text-[11.5px] text-ink-500">{t.note}</p>
+              <p className={`mt-2 text-[12px] ${t.hero ? "text-white/55" : "text-ink-400"}`}>
+                {t.note}
+              </p>
 
               <ul className="mt-7 flex-1 space-y-2.5">
                 {t.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[13.5px] text-ink-300">
+                  <li
+                    key={f}
+                    className={`flex items-start gap-2.5 text-[13.5px] ${
+                      t.hero ? "text-white/85" : "text-ink-300"
+                    }`}
+                  >
                     <span
-                      className="mt-[7px] block h-1 w-1 shrink-0 rounded-full"
-                      style={{ background: "var(--accent)" }}
+                      className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full ${
+                        t.hero ? "bg-white/15 text-white" : "bg-[var(--accent-soft)] text-[var(--accent)]"
+                      }`}
                       aria-hidden="true"
-                    />
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="h-2.5 w-2.5">
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                    </span>
                     {f}
                   </li>
                 ))}
@@ -127,7 +145,9 @@ export default function Pricing() {
 
               <Link
                 href={t.cta.href}
-                className={`btn mt-8 w-full ${t.cta.primary ? "btn-primary" : "btn-ghost"}`}
+                className={`btn mt-8 w-full ${
+                  t.hero ? "btn-invert" : t.cta.primary ? "btn-primary" : "btn-ghost"
+                }`}
                 aria-disabled={!t.cta.primary}
               >
                 {t.cta.label}

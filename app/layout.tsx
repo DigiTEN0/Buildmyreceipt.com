@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Inter, Manrope, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { SITE, NAV, STATS } from "@/lib/site";
+import { SITE, NAV } from "@/lib/site";
+import SiteLogo from "@/components/SiteLogo";
 
-const body = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-const display = Bricolage_Grotesque({
+const body = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const display = Manrope({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700", "800"],
 });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb", display: "swap" });
 
@@ -36,7 +33,6 @@ export const metadata: Metadata = {
     "receipt template",
     "itemized receipt",
     "receipt maker online",
-    "fake receipt maker",
     "printable receipt",
   ],
   authors: [{ name: SITE.name }],
@@ -64,78 +60,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#faf8f4",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
 
-export function LogoMark({ size = 36 }: { size?: number }) {
-  return (
-    <span
-      className="relative inline-grid shrink-0 place-items-center"
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size * 0.3,
-        background: "var(--grad-warm)",
-        boxShadow:
-          "0 5px 14px -4px rgba(246,81,29,.55), inset 0 1px 0 rgba(255,255,255,.32)",
-      }}
-      aria-hidden="true"
-    >
-      <svg width={size * 0.52} viewBox="0 0 20 22" fill="none">
-        <path
-          d="M3 1.6H17V19.2L14.67 20.8 12.33 19.2 10 20.8 7.67 19.2 5.33 20.8 3 19.2Z"
-          fill="#fff"
-        />
-        <rect x="6" y="5" width="8" height="2.3" rx="1.15" fill="#f6511d" />
-        <rect x="6" y="9.4" width="8" height="1.5" rx=".75" fill="#ffb59e" />
-        <rect x="6" y="12.4" width="5" height="1.5" rx=".75" fill="#ffb59e" />
-      </svg>
-      {/* verified badge */}
-      <span
-        className="absolute grid place-items-center rounded-full bg-white"
-        style={{
-          width: size * 0.42,
-          height: size * 0.42,
-          right: -size * 0.1,
-          bottom: -size * 0.1,
-          boxShadow: "0 2px 5px rgba(60,30,10,.25)",
-        }}
-      >
-        <svg
-          width={size * 0.24}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="var(--accent-600)"
-          strokeWidth="3.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
-      </span>
-    </span>
-  );
-}
-
-function Logo({ className = "" }: { className?: string }) {
-  return (
-    <span className={`flex items-center gap-2.5 ${className}`}>
-      <LogoMark size={34} />
-      <span className="font-display text-[17px] font-extrabold leading-none tracking-[-0.03em] text-ink-50">
-        BuildMy<span className="gradient-text">Receipt</span>
-      </span>
-    </span>
-  );
-}
-
 function Header() {
   return (
-    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(250,248,244,.82)] backdrop-blur-xl">
+    <header className="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(255,255,255,.82)] backdrop-blur-xl">
       <div className="container-x flex h-16 items-center justify-between gap-6">
         <Link href="/" className="shrink-0" aria-label={SITE.name}>
-          <Logo />
+          <SiteLogo height={28} />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
@@ -143,7 +78,7 @@ function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className="rounded-lg px-3.5 py-2 text-[14px] font-medium text-ink-300 transition-colors hover:bg-[var(--bg-2)] hover:text-ink-50"
+              className="rounded-lg px-3.5 py-2 text-[14px] font-medium text-ink-300 transition-colors hover:text-ink-50"
             >
               {n.label}
             </Link>
@@ -151,15 +86,12 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <span
-            className="hidden items-center gap-1.5 text-[13px] font-medium text-ink-300 lg:flex"
-            title={`Rated ${STATS.rating} out of 5`}
+          <Link
+            href="/generator"
+            className="hidden text-[14px] font-medium text-ink-300 transition-colors hover:text-ink-50 sm:block"
           >
-            <span className="text-[var(--amber)]" aria-hidden="true">
-              ★★★★★
-            </span>
-            <span className="text-ink-400">{STATS.rating}</span>
-          </span>
+            Sign in
+          </Link>
           <Link href="/generator" className="btn btn-primary !py-2.5 !text-[13.5px]">
             Make a receipt
           </Link>
@@ -209,27 +141,20 @@ function Footer() {
   ];
 
   return (
-    <footer className="no-print mt-24 border-t border-[var(--line)] bg-[var(--paper-2)]">
-      <div className="container-x py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(2,1fr)] lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+    <footer className="no-print mt-24 bg-[var(--surface-dark)] text-[#a1a1aa]">
+      <div className="container-x py-16">
+        <div className="grid gap-12 md:grid-cols-[1.5fr_repeat(2,1fr)] lg:grid-cols-[1.6fr_repeat(4,1fr)]">
           <div>
-            <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-400">
+            <SiteLogo height={26} dark />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-[#a1a1aa]">
               The free receipt maker for business record-keeping. Pick a template, customize
-              it, and download a realistic receipt in under 60 seconds — PNG, PDF or JPEG, no
-              signup.
+              it, and download a realistic receipt in seconds — PNG, PDF or JPEG, no signup.
             </p>
-            <div className="mt-5 flex items-center gap-2 text-[13px] text-ink-400">
-              <span className="text-[var(--amber)]" aria-hidden="true">
-                ★★★★★
-              </span>
-              <span>Trusted by thousands worldwide</span>
-            </div>
           </div>
 
           {cols.map((c) => (
             <div key={c.title}>
-              <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-500">
+              <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.1em] text-[#71717a]">
                 {c.title}
               </h3>
               <ul className="space-y-2.5">
@@ -237,7 +162,7 @@ function Footer() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="text-sm text-ink-400 transition-colors hover:text-ink-50"
+                      className="text-sm text-[#a1a1aa] transition-colors hover:text-white"
                     >
                       {l.label}
                     </Link>
@@ -248,20 +173,20 @@ function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 space-y-3 border-t border-[var(--line)] pt-8 text-xs leading-relaxed text-ink-500">
+        <div className="mt-14 space-y-3 border-t border-white/10 pt-8 text-xs leading-relaxed text-[#71717a]">
           <p>
-            <strong className="text-ink-400">Disclaimer:</strong> All templates contain
+            <strong className="text-[#a1a1aa]">Disclaimer:</strong> All templates contain
             fictional example content for illustration only. Business names, addresses and
             transaction details shown in previews do not represent real businesses,
             transactions or individuals.
           </p>
           <p>
-            <strong className="text-ink-400">Intended use:</strong> Receipts generated with
+            <strong className="text-[#a1a1aa]">Intended use:</strong> Receipts generated with
             this tool are for legitimate business documentation — recording your own sales,
             reissuing records for transactions that occurred, and template or testing
             purposes. They must not be used for fraud, forgery, false claims or
             misrepresentation. See our{" "}
-            <Link href="/legal/acceptable-use" className="link">
+            <Link href="/legal/acceptable-use" className="text-[#a1a1aa] underline underline-offset-2 hover:text-white">
               Acceptable Use Policy
             </Link>{" "}
             for details.
